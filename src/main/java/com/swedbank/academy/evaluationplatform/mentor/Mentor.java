@@ -1,4 +1,4 @@
-package com.swedbank.academy.evaluationplatform.lecturer;
+package com.swedbank.academy.evaluationplatform.mentor;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,15 +15,13 @@ import javax.validation.constraints.NotNull;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Lecturer {
+public class Mentor {
 
     @Id
     private long id;
     @Column(name = "name")
     @NotNull private String name;
-    @Column(name= "email")
-    private String email;
-    @Column(name = "area")
-    private Area area;
+    @Column(name = "stream")
+    private Stream stream;
 
 }

@@ -1,12 +1,12 @@
-package com.swedbank.academy.evaluationplatform.lecturer;
+package com.swedbank.academy.evaluationplatform.mentor;
 
-public enum Area {
+public enum Stream {
 
     BACKEND("backEnd"), FRONTEND("frontEnd"), QUALITY_ASSURANCE("QA");
 
     private String displayValue;
 
-    Area(String displayValue) {
+    Stream(String displayValue) {
         this.displayValue = displayValue;
     }
 

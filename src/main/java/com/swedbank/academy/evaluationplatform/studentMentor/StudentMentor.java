@@ -22,10 +22,12 @@ public class StudentMentor {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "studentMentor_sequence")
     private long id;
 
+//    @ManyToOne(fetch = FetchType.LAZY)
     @ManyToOne
     @JoinColumn(name = "mentor_id")
     private Mentor mentor;
 
+//    @ManyToOne(fetch = FetchType.LAZY)
     @ManyToOne
     @JoinColumn(name = "student_id")
     private Student student;
@@ -37,8 +39,8 @@ public class StudentMentor {
 //    @JoinColumn(name = "evaluation_form_id", referencedColumnName = "id")
 //    private EvaluationForm evaluationForm;
 
-        @OneToOne(mappedBy = "studentMentor")
-        private EvaluationForm evaluationForm;
+    @OneToOne(mappedBy = "studentMentor")
+    private EvaluationForm evaluationForm;
 
     public StudentMentor(long id, Mentor mentor, Student student, Integer isEvaluated, EvaluationForm evaluationForm) {
         this.id = id;

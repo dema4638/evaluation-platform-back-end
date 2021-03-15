@@ -1,10 +1,9 @@
 package com.swedbank.academy.evaluationplatform.mentor;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.swedbank.academy.evaluationplatform.studentMentor.StudentMentor;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -28,6 +27,11 @@ public class Mentor {
     @Column(name = "stream")
     private Stream stream;
 
+//    @OneToMany(mappedBy = "mentor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JsonIgnore
+//    @ToString.Exclude
+//    @EqualsAndHashCode.Exclude
+////    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @OneToMany(mappedBy = "mentor")
     Set<StudentMentor> studentsMentors;
 
@@ -50,7 +54,7 @@ public class Mentor {
     public Set<StudentMentor> getStudentsMentors(Integer isEvaluated){
         Set<StudentMentor> evaluatedStudentsMentors = new HashSet<StudentMentor>();
         for (StudentMentor student : studentsMentors){
-            if (student.isEvaluated()== isEvaluated){
+            if (student.isEvaluated().equals(isEvaluated)){
                 evaluatedStudentsMentors.add(student);
             }
         }

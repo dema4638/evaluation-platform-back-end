@@ -24,7 +24,7 @@ public class MentorServiceImpl implements MentorService {
 
     @Override
     public Mentor getMentor(long id) {
-        return mentorRepository.getOne(id);
+        return mentorRepository.findById(id).get();
     }
 
     @Override

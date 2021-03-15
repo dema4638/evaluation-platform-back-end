@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -32,16 +33,32 @@ public class MentorController {
         return new ResponseEntity<List<Mentor>>(mentors, HttpStatus.OK);
     }
 
-    @GetMapping("{id}/student/{isEvaluated}")
-    public ResponseEntity<Set<StudentMentor>> getStudents(@PathVariable long id, @RequestParam(required = false) Integer isEvaluated){
+    @GetMapping("{id}/student")
+    public ResponseEntity<Set<MentorStudentDTO>> getStudents(@PathVariable long id, @RequestParam(required = false) Integer isEvaluated){
         Set<StudentMentor> mentorsStudents;
+        Set<MentorStudentDTO>mentorStudentDTOs = new HashSet<>();
         Mentor mentor = mentorService.getMentor(id);
         if (isEvaluated == null) {
             mentorsStudents = mentor.getStudentsMentors();
         }else{
             mentorsStudents = mentor.getStudentsMentors(isEvaluated);
         }
-        return new ResponseEntity<Set<StudentMentor>>(mentorsStudents, HttpStatus.OK);
+        for(StudentMentor studentMentor : mentorsStudents){
+            Student student = studentMentor.getStudent();
+            String image = student.getImage();
+            String name = student.getName();
+            long studentId = student.getId();
+            Integer isStudentEvaluated = studentMentor.isEvaluated();
+            boolean isStudentEvaluatedBool;
+            if (isStudentEvaluated==1){
+                isStudentEvaluatedBool=true;
+            }else{
+                isStudentEvaluatedBool=false;
+            }
+
+            mentorStudentDTOs.add(new MentorStudentDTO(studentId, name, image, isStudentEvaluatedBool));
+        }
+        return new ResponseEntity<Set<MentorStudentDTO>>(mentorStudentDTOs, HttpStatus.OK);
     }
 
     @GetMapping("{mentorId}/student/{studentMentorID}/evaluationForm/{formId}")

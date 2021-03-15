@@ -1,5 +1,6 @@
 package com.swedbank.academy.evaluationplatform.mentor;
 
+import com.swedbank.academy.evaluationplatform.mentor.exceptions.MentorNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,4 +28,16 @@ public class MentorController {
         mentorService.addMentor(mentor);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping(produces = "application/json")
+    public ResponseEntity<Mentor> getMentorById(Mentor mentor){
+        try {
+            mentor = mentorService.getMentorById(mentor.getId());
+            return new ResponseEntity<Mentor>(mentor, HttpStatus.OK);
+        }
+        catch (MentorNotFoundException e){
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }

@@ -30,7 +30,7 @@ public class MentorController {
     }
 
     @GetMapping(produces = "application/json")
-    public ResponseEntity<Mentor> getMentorById(Mentor mentor){
+    public ResponseEntity<Mentor> getMentorById(@RequestBody Mentor mentor){
         try {
             mentor = mentorService.getMentorById(mentor.getId());
             return new ResponseEntity<Mentor>(mentor, HttpStatus.OK);

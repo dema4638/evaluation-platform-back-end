@@ -1,12 +1,11 @@
 package com.swedbank.academy.evaluationplatform.student;
 
+import com.swedbank.academy.evaluationplatform.studentMentor.StudentMentor;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table
@@ -15,6 +14,9 @@ import javax.persistence.Table;
 public class Student {
 
     @Id
+    @SequenceGenerator(name = "student_sequence", sequenceName = "student_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_sequence")
+    @Column(updatable = false)
     private long id;
 
     @Column(name = "name")
@@ -25,4 +27,7 @@ public class Student {
 
     public Student() {
     }
+
+    @OneToMany(mappedBy = "student")
+    Set<StudentMentor> StudentsMentors;
 }

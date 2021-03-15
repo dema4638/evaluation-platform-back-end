@@ -1,6 +1,8 @@
 package com.swedbank.academy.evaluationplatform.mentor;
 
+import com.swedbank.academy.evaluationplatform.studentMentor.StudentMentor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +20,16 @@ public class MentorServiceImpl implements MentorService {
     @Override
     public List<Mentor> getMentors() {
         return mentorRepository.findAll();
+    }
+
+    @Override
+    public Mentor getMentor(long id) {
+        return mentorRepository.getOne(id);
+    }
+
+    @Override
+    public ResponseEntity<List<StudentMentor>> getMentorsStudents(long id) {
+        return null;
     }
 
     @Override

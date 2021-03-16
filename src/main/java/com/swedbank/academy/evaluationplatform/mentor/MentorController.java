@@ -1,6 +1,7 @@
 package com.swedbank.academy.evaluationplatform.mentor;
 
 import com.swedbank.academy.evaluationplatform.evaluationForm.EvaluationForm;
+import com.swedbank.academy.evaluationplatform.evaluationForm.EvaluationFormDTO;
 import com.swedbank.academy.evaluationplatform.evaluationForm.EvaluationFormService;
 import com.swedbank.academy.evaluationplatform.studentMentor.StudentMentor;
 import com.swedbank.academy.evaluationplatform.studentMentor.StudentMentorService;
@@ -20,10 +21,11 @@ public class MentorController {
     private StudentMentorService studentMentorService;
     private EvaluationFormService evaluationFormService;
 
-    public MentorController(MentorService mentorService, StudentMentorService studentMentorService) {
+    public MentorController(MentorService mentorService, StudentMentorService studentMentorService, EvaluationFormService evaluationFormService) {
 
         this.mentorService = mentorService;
         this.studentMentorService = studentMentorService;
+        this.evaluationFormService = evaluationFormService;
     }
 
     @GetMapping(produces = "application/json")
@@ -47,6 +49,12 @@ public class MentorController {
     public ResponseEntity<EvaluationForm> getEvaluationForms(@PathVariable long mentorId, @PathVariable long studentMentorID, @PathVariable long formId){
         EvaluationForm evaluationForm = evaluationFormService.getEvaluationForm(formId);
         return new ResponseEntity<EvaluationForm>(evaluationForm, HttpStatus.OK);
+    }
+
+    @GetMapping("{mentorId}/student/{studentId}/evaluation")
+    public ResponseEntity<EvaluationFormDTO> getEvaluationForms(@PathVariable long mentorId, @PathVariable long studentId){
+        EvaluationFormDTO evaluation = evaluationFormService.getEvaluationFormByIds(mentorId, studentId);
+        return new ResponseEntity<EvaluationFormDTO>(evaluation, HttpStatus.OK);
     }
 
     @PostMapping("{mentorId}/student/{studentId}/evaluationForm")

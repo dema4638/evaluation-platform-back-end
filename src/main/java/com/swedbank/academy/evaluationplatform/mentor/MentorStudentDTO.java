@@ -1,7 +1,8 @@
 package com.swedbank.academy.evaluationplatform.mentor;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Data;
 
+@Data
 public class MentorStudentDTO {
     private long id;
     private String name;
@@ -15,19 +16,4 @@ public class MentorStudentDTO {
         this.isEvaluated = isEvaluated;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public boolean isEvaluated() {
-        return isEvaluated;
-    }
 }

@@ -3,14 +3,13 @@ package com.swedbank.academy.evaluationplatform.mentor;
 import com.swedbank.academy.evaluationplatform.evaluationForm.EvaluationForm;
 import com.swedbank.academy.evaluationplatform.evaluationForm.EvaluationFormDTO;
 import com.swedbank.academy.evaluationplatform.evaluationForm.EvaluationFormService;
+import com.swedbank.academy.evaluationplatform.mentor.exceptions.MentorNotFoundException;
 import com.swedbank.academy.evaluationplatform.studentMentor.StudentMentor;
 import com.swedbank.academy.evaluationplatform.studentMentor.StudentMentorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -36,8 +35,12 @@ public class MentorController {
 
     @GetMapping("{id}")
     public ResponseEntity<MentorDTO> getMentors(@PathVariable long id){
-        MentorDTO mentor = mentorService.getMentorById(id);
-        return new ResponseEntity<>(mentor, HttpStatus.OK);
+        try {
+            MentorDTO mentor = mentorService.getMentorById(id);
+            return new ResponseEntity<>(mentor, HttpStatus.OK);
+        } catch (MentorNotFoundException e){
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("{id}/student")

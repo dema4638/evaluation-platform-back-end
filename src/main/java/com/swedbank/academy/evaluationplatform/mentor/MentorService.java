@@ -1,5 +1,6 @@
 package com.swedbank.academy.evaluationplatform.mentor;
 
+import com.swedbank.academy.evaluationplatform.mentor.exceptions.MentorNotFoundException;
 import com.swedbank.academy.evaluationplatform.studentMentor.StudentMentor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,11 +12,11 @@ public interface MentorService {
 
     public Set<MentorDTO> getMentors();
 
-    public MentorDTO getMentorById(long id);
+    public MentorDTO getMentorById(long id)  throws MentorNotFoundException;
 
     public Set<MentorStudentDTO> getMentorsStudents(long id, Integer isEvaluated);
 
-    public Mentor getMentor(long id);
+    public Mentor getMentor(long id) ;
 
     public ResponseEntity<List<StudentMentor>> getMentorsStudents(@PathVariable long id);
 

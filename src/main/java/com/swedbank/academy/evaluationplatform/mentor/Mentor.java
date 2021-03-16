@@ -1,9 +1,9 @@
 package com.swedbank.academy.evaluationplatform.mentor;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.swedbank.academy.evaluationplatform.studentMentor.StudentMentor;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -15,7 +15,6 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
 public class Mentor {
 
     @Id
@@ -29,18 +28,6 @@ public class Mentor {
 
     @OneToMany(mappedBy = "mentor")
     Set<StudentMentor> studentsMentors;
-
-    public long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Stream getStream() {
-        return stream;
-    }
 
     public Set<StudentMentor> StudentsMentors() {
         return studentsMentors;

@@ -29,7 +29,7 @@ public class EvaluationForm {
     private long id;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "student_mentor_id", referencedColumnName = "id")
     private StudentMentor studentMentor;
 

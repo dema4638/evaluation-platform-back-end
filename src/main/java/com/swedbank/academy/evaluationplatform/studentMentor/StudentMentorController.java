@@ -8,7 +8,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("api/mentor/{mentorId}/student")
+//@RequestMapping("api/mentor/{mentorId}/student")
 public class StudentMentorController {
 
     private StudentMentorService studentMentorService;

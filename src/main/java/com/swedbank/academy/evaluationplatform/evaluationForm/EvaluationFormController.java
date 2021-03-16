@@ -3,6 +3,7 @@ package com.swedbank.academy.evaluationplatform.evaluationForm;
 import com.swedbank.academy.evaluationplatform.student.StudentDTO;
 import com.swedbank.academy.evaluationplatform.studentMentor.StudentMentor;
 import com.swedbank.academy.evaluationplatform.studentMentor.StudentMentorService;
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +40,7 @@ public class EvaluationFormController {
     }
 
     @PostMapping(consumes = "application/json",produces = "application/json")
-    public ResponseEntity<EvaluationForm>createEvaluationForm(@RequestBody EvaluationFormDTO evaluationFormDTO) {
+    public ResponseEntity<?>createEvaluationForm(@RequestBody EvaluationFormDTO evaluationFormDTO) {
         long mentorId = evaluationFormDTO.getMentorID();
         long studentId = evaluationFormDTO.getStudentId();
         String comment = evaluationFormDTO.getComment();
@@ -48,6 +49,9 @@ public class EvaluationFormController {
         int learningPace = evaluationFormDTO.getLearningPace();
         int extraMile = evaluationFormDTO.getExtraMile();
         StudentMentor studentMentor = studentMentorService.getStudentMentorByIds(mentorId, studentId);
+        if (studentMentor == null) {
+            return new ResponseEntity<String>("Could not find student+mentor with provided IDs", HttpStatus.BAD_REQUEST);
+        }
         EvaluationForm evaluationForm = new EvaluationForm(studentMentor, participation, techSkills, learningPace, extraMile, comment);
         evaluationFormService.createEvaluationForm(evaluationForm);
         studentMentorService.updateWhenEvaluationFormWasCreated(studentMentor.getId());

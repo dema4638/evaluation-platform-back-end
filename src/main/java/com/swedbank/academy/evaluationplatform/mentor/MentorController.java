@@ -2,7 +2,6 @@ package com.swedbank.academy.evaluationplatform.mentor;
 
 import com.swedbank.academy.evaluationplatform.evaluationForm.EvaluationForm;
 import com.swedbank.academy.evaluationplatform.evaluationForm.EvaluationFormService;
-import com.swedbank.academy.evaluationplatform.student.Student;
 import com.swedbank.academy.evaluationplatform.studentMentor.StudentMentor;
 import com.swedbank.academy.evaluationplatform.studentMentor.StudentMentorService;
 import org.springframework.http.HttpStatus;
@@ -28,37 +27,20 @@ public class MentorController {
     }
 
     @GetMapping(produces = "application/json")
-    public ResponseEntity<List<Mentor>> getMentors(){
-        List<Mentor> mentors = mentorService.getMentors();
-        return new ResponseEntity<List<Mentor>>(mentors, HttpStatus.OK);
+    public ResponseEntity<Set<MentorDTO>> getMentors(){
+        Set<MentorDTO> mentors = mentorService.getMentors();
+        return new ResponseEntity<>(mentors, HttpStatus.OK);
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<MentorDTO> getMentors(@PathVariable long id){
+        MentorDTO mentor = mentorService.getMentorById(id);
+        return new ResponseEntity<>(mentor, HttpStatus.OK);
     }
 
     @GetMapping("{id}/student")
     public ResponseEntity<Set<MentorStudentDTO>> getStudents(@PathVariable long id, @RequestParam(required = false) Integer isEvaluated){
-        Set<StudentMentor> mentorsStudents;
-        Set<MentorStudentDTO>mentorStudentDTOs = new HashSet<>();
-        Mentor mentor = mentorService.getMentor(id);
-        if (isEvaluated == null) {
-            mentorsStudents = mentor.getStudentsMentors();
-        }else{
-            mentorsStudents = mentor.getStudentsMentors(isEvaluated);
-        }
-        for(StudentMentor studentMentor : mentorsStudents){
-            Student student = studentMentor.getStudent();
-            String image = student.getImage();
-            String name = student.getName();
-            long studentId = student.getId();
-            Integer isStudentEvaluated = studentMentor.isEvaluated();
-            boolean isStudentEvaluatedBool;
-            if (isStudentEvaluated==1){
-                isStudentEvaluatedBool=true;
-            }else{
-                isStudentEvaluatedBool=false;
-            }
-
-            mentorStudentDTOs.add(new MentorStudentDTO(studentId, name, image, isStudentEvaluatedBool));
-        }
-        return new ResponseEntity<Set<MentorStudentDTO>>(mentorStudentDTOs, HttpStatus.OK);
+        return new ResponseEntity<>(mentorService.getMentorsStudents(id, isEvaluated), HttpStatus.OK);
     }
 
     @GetMapping("{mentorId}/student/{studentMentorID}/evaluationForm/{formId}")
@@ -67,10 +49,11 @@ public class MentorController {
         return new ResponseEntity<EvaluationForm>(evaluationForm, HttpStatus.OK);
     }
 
-    @PostMapping("{mentorId}/student/{studentMentorID}/evaluationForm/{formId}")
-        public ResponseEntity<Void>createEvaluationForm(@PathVariable long formId, @RequestBody EvaluationForm evaluationForm, @PathVariable long mentorId, @PathVariable long studentMentorID){
+    @PostMapping("{mentorId}/student/{studentId}/evaluationForm")
+        public ResponseEntity<Void>createEvaluationForm(@RequestBody EvaluationForm evaluationForm, @PathVariable long mentorId, @PathVariable long studentId){
+        StudentMentor studentMentor = studentMentorService.getStudentMentorByIds(mentorId, studentId);
         evaluationFormService.createEvaluationForm(evaluationForm);
-        studentMentorService.updateWhenEvaluationFormWasCreated(evaluationForm.getStudentMentor().getId());
+        studentMentorService.updateWhenEvaluationFormWasCreated(studentMentor.getId());
         return ResponseEntity.ok().build();
     }
 

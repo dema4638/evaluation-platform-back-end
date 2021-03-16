@@ -13,7 +13,8 @@ public class EvaluationFormServiceImpl implements EvaluationFormService{
 
     @Override
     public EvaluationForm getEvaluationForm(long id) {
-        return null;
+
+        return evaluationFormRepository.findById(id).get();
     }
 
     @Override

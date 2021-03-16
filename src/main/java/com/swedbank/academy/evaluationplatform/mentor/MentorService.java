@@ -5,10 +5,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Set;
 
 public interface MentorService {
 
-    public List<Mentor> getMentors();
+    public Set<MentorDTO> getMentors();
+
+    public MentorDTO getMentorById(long id);
+
+    public Set<MentorStudentDTO> getMentorsStudents(long id, Integer isEvaluated);
 
     public Mentor getMentor(long id);
 

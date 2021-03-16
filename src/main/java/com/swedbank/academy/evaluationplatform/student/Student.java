@@ -1,13 +1,7 @@
 package com.swedbank.academy.evaluationplatform.student;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.swedbank.academy.evaluationplatform.studentMentor.StudentMentor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
-
 import javax.persistence.*;
 import java.util.Set;
 
@@ -32,11 +26,6 @@ public class Student {
     public Student() {
     }
 
-//    @OneToMany(mappedBy = "student",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JsonIgnore
-//    @ToString.Exclude
-//    @EqualsAndHashCode.Exclude
-//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @OneToMany(mappedBy = "student")
     Set<StudentMentor> StudentsMentors;
 }

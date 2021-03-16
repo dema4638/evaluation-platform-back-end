@@ -1,7 +1,6 @@
 package com.swedbank.academy.evaluationplatform.evaluationForm;
 
 import com.swedbank.academy.evaluationplatform.studentMentor.StudentMentor;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,17 +11,23 @@ import javax.persistence.*;
 @Table
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 public class EvaluationForm {
+
+    public EvaluationForm(StudentMentor studentMentor, int participation, int techSkills, int learningPace, int extraMile, String comment) {
+        this.studentMentor = studentMentor;
+        this.participation = participation;
+        this.techSkills = techSkills;
+        this.learningPace = learningPace;
+        this.extraMile = extraMile;
+        this.comment = comment;
+    }
 
     @Id
     @SequenceGenerator(name = "evaluationForm_sequence", sequenceName = "evaluationForm_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "evaluationForm_sequence")
     private long id;
 
-//    @OneToOne(mappedBy = "evaluationForm")
-//    private StudentMentor studentMentor;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "student_mentor_id", referencedColumnName = "id")
@@ -71,6 +76,4 @@ public class EvaluationForm {
     public int getTechSkills() {
         return techSkills;
     }
-
-
 }

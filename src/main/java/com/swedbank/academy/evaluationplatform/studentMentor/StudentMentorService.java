@@ -10,5 +10,6 @@ public interface StudentMentorService {
     public StudentMentor getOneStudentMentor(long studentId);
     void addStudentMentor(StudentMentor studentMentor);
     public void updateWhenEvaluationFormWasCreated(long id);
+    public StudentMentor getStudentMentorByIds(long mentorId, long studentId);
 
 }

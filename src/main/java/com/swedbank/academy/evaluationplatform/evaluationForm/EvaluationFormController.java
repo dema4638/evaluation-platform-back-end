@@ -1,6 +1,8 @@
 package com.swedbank.academy.evaluationplatform.evaluationForm;
 
+import com.swedbank.academy.evaluationplatform.student.StudentDTO;
 import com.swedbank.academy.evaluationplatform.studentMentor.StudentMentor;
+import com.swedbank.academy.evaluationplatform.studentMentor.StudentMentorService;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,27 +11,55 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/mentor/{mentorId}/student/{studentId}/evaluationForm")
+//@RequestMapping("api/mentor/{mentorId}/student/{studentId}/evaluationForm")
+@RequestMapping("api/evaluation")
 public class EvaluationFormController {
 
     EvaluationFormService evaluationFormService;
+    StudentMentorService studentMentorService;
 
-    public EvaluationFormController(EvaluationFormService evaluationFormService) {
+    public EvaluationFormController(EvaluationFormService evaluationFormService, StudentMentorService studentMentorService) {
         this.evaluationFormService = evaluationFormService;
+        this.studentMentorService=studentMentorService;
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<EvaluationForm>getEvaluationForm(@PathVariable long id){
+    public ResponseEntity<EvaluationFormDTO>getEvaluationForm(@PathVariable long id){
         EvaluationForm evaluationForm = this.evaluationFormService.getEvaluationForm(id);
-        return new ResponseEntity<EvaluationForm>(evaluationForm, HttpStatus.OK);
+        long formId= evaluationForm.getId();
+        int participation = evaluationForm.getParticipation();
+        int techSkills = evaluationForm.getTechSkills();
+        int learningPace = evaluationForm.getLearningPace();
+        int extraMile = evaluationForm.getExtraMile();
+        String comment = evaluationForm.getComment();
+        long studentId = evaluationForm.getStudentMentor().getStudent().getId();
+        long mentorId = evaluationForm.getStudentMentor().getMentor().getId();
+        EvaluationFormDTO evaluationFormDTO = new EvaluationFormDTO(formId, mentorId, participation, techSkills, learningPace, extraMile, comment, studentId);
+        return new ResponseEntity<EvaluationFormDTO>(evaluationFormDTO, HttpStatus.OK);
     }
 
     @PostMapping(consumes = "application/json",produces = "application/json")
-    public ResponseEntity<EvaluationForm>createEvaluationForm(@PathVariable long id){
-        EvaluationForm evaluationForm = this.evaluationFormService.getEvaluationForm(id);
+    public ResponseEntity<EvaluationForm>createEvaluationForm(@RequestBody EvaluationFormDTO evaluationFormDTO) {
+        long mentorId = evaluationFormDTO.getMentorID();
+        long studentId = evaluationFormDTO.getStudentId();
+        String comment = evaluationFormDTO.getComment();
+        int participation = evaluationFormDTO.getParticipation();
+        int techSkills = evaluationFormDTO.getTechSkills();
+        int learningPace = evaluationFormDTO.getLearningPace();
+        int extraMile = evaluationFormDTO.getExtraMile();
+        StudentMentor studentMentor = studentMentorService.getStudentMentorByIds(mentorId, studentId);
+        EvaluationForm evaluationForm = new EvaluationForm(studentMentor, participation, techSkills, learningPace, extraMile, comment);
+        evaluationFormService.createEvaluationForm(evaluationForm);
+        studentMentorService.updateWhenEvaluationFormWasCreated(studentMentor.getId());
+        return ResponseEntity.ok().build();
+        }
 
-        return new ResponseEntity<EvaluationForm>(evaluationForm, HttpStatus.OK);
-    }
+//    @PostMapping(consumes = "application/json",produces = "application/json")
+//    public ResponseEntity<EvaluationForm>createEvaluationForm(@PathVariable long id){
+//        EvaluationForm evaluationForm = this.evaluationFormService.getEvaluationForm(id);
+//
+//        return new ResponseEntity<EvaluationForm>(evaluationForm, HttpStatus.OK);
+//    }
 
     @GetMapping(produces = "application/json")
     public ResponseEntity<Void>getEvaluationForm(@RequestBody EvaluationForm evaluationForm) {

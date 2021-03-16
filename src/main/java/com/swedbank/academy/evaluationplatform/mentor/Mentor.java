@@ -27,11 +27,6 @@ public class Mentor {
     @Column(name = "stream")
     private Stream stream;
 
-//    @OneToMany(mappedBy = "mentor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JsonIgnore
-//    @ToString.Exclude
-//    @EqualsAndHashCode.Exclude
-////    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @OneToMany(mappedBy = "mentor")
     Set<StudentMentor> studentsMentors;
 

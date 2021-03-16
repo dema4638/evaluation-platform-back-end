@@ -1,6 +1,5 @@
 package com.swedbank.academy.evaluationplatform.studentMentor;
 
-import com.swedbank.academy.evaluationplatform.evaluationForm.EvaluationForm;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

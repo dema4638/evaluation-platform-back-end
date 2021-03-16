@@ -29,6 +29,19 @@ public class StudentMentorServiceImpl implements StudentMentorService{
     }
 
     @Override
+    public StudentMentor getStudentMentorByIds(long mentorId, long studentId) {
+        List<StudentMentor> studentsMentors = studentMentorRepository.findAll();
+        for (StudentMentor studentMentor : studentsMentors){
+            Student student = studentMentor.getStudent();
+            Mentor mentor = studentMentor.getMentor();
+            if ((student.getId()==studentId) && (mentor.getId()==mentorId)){
+                return studentMentor;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public void addStudentMentor(StudentMentor studentMentor) {
         studentMentorRepository.save(studentMentor);
     }

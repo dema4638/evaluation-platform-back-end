@@ -1,5 +1,8 @@
 package com.swedbank.academy.evaluationplatform.student;
 
+import lombok.Data;
+
+@Data
 public class StudentDTO {
     private long id;
     private String name;
@@ -9,17 +12,5 @@ public class StudentDTO {
         this.id = id;
         this.name = name;
         this.image = image;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getImage() {
-        return image;
     }
 }

@@ -1,14 +1,13 @@
 package com.swedbank.academy.evaluationplatform.student;
 import com.swedbank.academy.evaluationplatform.studentMentor.StudentMentor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table
-@Getter
-@Setter
+@Data
 public class Student {
 
     @Id

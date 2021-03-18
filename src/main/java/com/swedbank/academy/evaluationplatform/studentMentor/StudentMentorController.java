@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 //@RequestMapping("api/mentor/{mentorId}/student")
+@CrossOrigin(origins ="*", allowedHeaders ="*")
 public class StudentMentorController {
 
     private StudentMentorService studentMentorService;

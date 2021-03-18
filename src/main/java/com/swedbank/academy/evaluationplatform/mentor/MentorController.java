@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Set;
 
 @RestController
+@CrossOrigin(origins ="*", allowedHeaders ="*")
 @RequestMapping("api/mentor")
 public class MentorController {
 

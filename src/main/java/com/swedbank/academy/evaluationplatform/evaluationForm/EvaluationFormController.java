@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-//@RequestMapping("api/mentor/{mentorId}/student/{studentId}/evaluationForm")
+@CrossOrigin(origins ="*", allowedHeaders ="*")
 @RequestMapping("api/evaluation")
 public class EvaluationFormController {
 

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins ="*", allowedHeaders ="*")
+//@CrossOrigin(origins ="*", allowedHeaders ="*")
 @RequestMapping("api/evaluation")
 public class EvaluationFormController {
 
@@ -41,7 +41,7 @@ public class EvaluationFormController {
     }
 
     @PostMapping(consumes = "application/json",produces = "application/json")
-    @CrossOrigin(origins ="*", allowedHeaders ="*")
+    @CrossOrigin(origins ="*", allowedHeaders ="*", methods = RequestMethod.POST)
     public ResponseEntity<?>createEvaluationForm(@RequestBody EvaluationFormDTO evaluationFormDTO) {
         long mentorId = evaluationFormDTO.getMentorID();
         long studentId = evaluationFormDTO.getStudentId();

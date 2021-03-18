@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins ="*", allowedHeaders ="*")
+//@CrossOrigin(origins ="*", allowedHeaders ="*")
 @RequestMapping("api/student")
 public class StudentController {
 

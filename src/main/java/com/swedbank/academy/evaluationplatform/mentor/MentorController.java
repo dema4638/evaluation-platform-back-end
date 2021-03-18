@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Set;
 
 @RestController
-@CrossOrigin(origins ="*", allowedHeaders ="*")
+//@CrossOrigin(origins ="*", allowedHeaders ="*")
 @RequestMapping("api/mentor")
 public class MentorController {
 
@@ -67,7 +67,7 @@ public class MentorController {
     }
 
     @PostMapping("{mentorId}/student/{studentId}/evaluationForm")
-    @CrossOrigin(origins ="*", allowedHeaders ="*")
+    @CrossOrigin(origins ="*", allowedHeaders ="*", methods = RequestMethod.POST)
         public ResponseEntity<Void>createEvaluationForm(@RequestBody EvaluationForm evaluationForm, @PathVariable long mentorId, @PathVariable long studentId){
         StudentMentor studentMentor = studentMentorService.getStudentMentorByIds(mentorId, studentId);
         evaluationFormService.createEvaluationForm(evaluationForm);
@@ -76,7 +76,7 @@ public class MentorController {
     }
 
     @PostMapping(consumes = "application/json")
-    @CrossOrigin(origins ="*", allowedHeaders ="*")
+    @CrossOrigin(origins ="*", allowedHeaders ="*", methods = RequestMethod.POST)
     public ResponseEntity<Void> addMentor(@RequestBody Mentor mentor){
         mentorService.addMentor(mentor);
         return ResponseEntity.ok().build();

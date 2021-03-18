@@ -1,4 +1,4 @@
-package com.swedbank.academy.evaluationplatform.evaluationForm;
+package com.swedbank.academy.evaluationplatform.evaluation;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

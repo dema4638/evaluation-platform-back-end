@@ -1,7 +1,7 @@
 package com.swedbank.academy.evaluationplatform.mentor;
 
-import com.swedbank.academy.evaluationplatform.evaluationForm.EvaluationDTO;
-import com.swedbank.academy.evaluationplatform.evaluationForm.EvaluationService;
+import com.swedbank.academy.evaluationplatform.evaluation.EvaluationDTO;
+import com.swedbank.academy.evaluationplatform.evaluation.EvaluationService;
 import com.swedbank.academy.evaluationplatform.mentor.exceptions.MentorNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

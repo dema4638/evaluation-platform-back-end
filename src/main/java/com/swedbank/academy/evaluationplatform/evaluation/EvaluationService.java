@@ -1,4 +1,4 @@
-package com.swedbank.academy.evaluationplatform.evaluationForm;
+package com.swedbank.academy.evaluationplatform.evaluation;
 
 import com.swedbank.academy.evaluationplatform.mentor.Mentor;
 import com.swedbank.academy.evaluationplatform.student.Student;

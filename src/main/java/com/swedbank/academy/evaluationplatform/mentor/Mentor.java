@@ -1,6 +1,6 @@
 package com.swedbank.academy.evaluationplatform.mentor;
 
-import com.swedbank.academy.evaluationplatform.evaluationForm.Evaluation;
+import com.swedbank.academy.evaluationplatform.evaluation.Evaluation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

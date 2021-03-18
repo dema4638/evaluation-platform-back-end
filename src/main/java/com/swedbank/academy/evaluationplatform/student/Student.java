@@ -1,5 +1,5 @@
 package com.swedbank.academy.evaluationplatform.student;
-import com.swedbank.academy.evaluationplatform.evaluationForm.Evaluation;
+import com.swedbank.academy.evaluationplatform.evaluation.Evaluation;
 import lombok.Data;
 
 import javax.persistence.*;

@@ -28,22 +28,5 @@ public class Mentor {
     @OneToMany(mappedBy = "mentor")
     Set<Evaluation> evaluationForms;
 
-//    public Set<StudentMentor> StudentsMentors() {
-//        return studentsMentors;
-//    }
-
-//    public Set<StudentMentor> getStudentsMentors(Integer isEvaluated){
-//        Set<StudentMentor> evaluatedStudentsMentors = new HashSet<StudentMentor>();
-//        for (StudentMentor student : studentsMentors){
-//            if (student.isEvaluated().equals(isEvaluated)){
-//                evaluatedStudentsMentors.add(student);
-//            }
-//        }
-//        return evaluatedStudentsMentors;
-//    }
-//
-//    public Set<StudentMentor> getStudentsMentors() {
-//        return studentsMentors;
-//    }
 
 }

@@ -28,14 +28,14 @@ public class EvaluationServiceImpl implements EvaluationService {
         int techSkills = evaluationDTO.getTechSkills();
         int learningPace = evaluationDTO.getLearningPace();
         int extraMile = evaluationDTO.getExtraMile();
-        Evaluation evaluation = new Evaluation(participation, techSkills, learningPace, extraMile, comment, mentor, student);
+        Evaluation evaluation = new Evaluation(participation, techSkills, learningPace, extraMile, comment, mentor, student, mentor.getStream());
         evaluationFormRepository.save(evaluation);
     }
 
     @Override
     public EvaluationDTO getEvaluationByIds(long mentor_id, long student_id) {
-        List<Evaluation> evaluationForms = evaluationFormRepository.findAll();
-        for (Evaluation evaluation : evaluationForms) {
+        List<Evaluation> evaluations = evaluationFormRepository.findAll();
+        for (Evaluation evaluation : evaluations) {
             if (evaluation.getStudent().getId()==student_id){
                 if (evaluation.getMentor().getId()==mentor_id){
                     return getEvaluationDTO(evaluation);
@@ -43,6 +43,18 @@ public class EvaluationServiceImpl implements EvaluationService {
             }
         }
         return null;
+    }
+
+    @Override
+    public boolean checkIfEvaluationExists(long mentorId, long studentId) {
+        List<Evaluation> evaluations = evaluationFormRepository.findAll();
+        for (Evaluation evaluation: evaluations){
+            if (evaluation.getStudent().getId() == studentId){
+                if (evaluation.getMentor().getId() == mentorId){
+                    return  true;
+                }
+            }
+        } return false;
     }
 
     public EvaluationDTO getEvaluationDTO(Evaluation evaluation){
@@ -57,4 +69,6 @@ public class EvaluationServiceImpl implements EvaluationService {
         EvaluationDTO evaluationDTO = new EvaluationDTO(formId, mentorId, participation, techSkills, learningPace, extraMile, comment, studentId);
         return evaluationDTO;
     }
+
+
 }

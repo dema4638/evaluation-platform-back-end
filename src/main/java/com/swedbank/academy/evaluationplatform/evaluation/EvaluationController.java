@@ -22,33 +22,12 @@ public class EvaluationController {
         this.studentService = studentService;
     }
 
-
-//    @GetMapping("{id}")
-//    public ResponseEntity<EvaluationDTO>getEvaluation(@PathVariable long id){
-//        Evaluation evaluationForm = this.evaluationService.getEvaluation(id);
-//        int participation = evaluationForm.getParticipation();
-//        int techSkills = evaluationForm.getTechSkills();
-//        int learningPace = evaluationForm.getLearningPace();
-//        int extraMile = evaluationForm.getExtraMile();
-//        String comment = evaluationForm.getComment();
-//        long studentId = evaluationForm.getStudent().getId();
-//        long mentorId = evaluationForm.getMentor().getId();
-//        EvaluationDTO evaluationFormDTO = new EvaluationDTO(id, mentorId, participation, techSkills, learningPace, extraMile, comment, studentId);
-//        return new ResponseEntity<EvaluationDTO>(evaluationFormDTO, HttpStatus.OK);
-//    }
-
     @PostMapping(consumes = "application/json",produces = "application/json")
+    @CrossOrigin(origins ="*", allowedHeaders ="*", methods = RequestMethod.POST)
     public ResponseEntity<?>createEvaluation(@RequestBody EvaluationDTO evaluationDTO) throws StudentNotFoundException {
         Mentor mentor = mentorService.getMentor(evaluationDTO.getMentorID());
-        Student student = studentService.getStudentByID(evaluationDTO.getStudentId());
+        Student student = studentService.getStudent(evaluationDTO.getStudentId());
         evaluationService.createEvaluation(evaluationDTO, mentor, student);
         return ResponseEntity.ok().build();
         }
-
-
-//    @GetMapping(produces = "application/json")
-//    public ResponseEntity<Void>getEvaluation(@RequestBody Evaluation evaluationForm) {
-//        this.evaluationService.createEvaluation(evaluationForm);
-//        return ResponseEntity.ok().build();
-//    }
 }

@@ -16,7 +16,7 @@ import javax.persistence.*;
 @Getter
 public class Evaluation {
 
-    public Evaluation(int participation, int techSkills, int learningPace, int extraMile, String comment, Mentor mentor, Student student) {
+    public Evaluation(int participation, int techSkills, int learningPace, int extraMile, String comment, Mentor mentor, Student student, Stream stream) {
         this.participation = participation;
         this.techSkills = techSkills;
         this.learningPace = learningPace;
@@ -24,6 +24,7 @@ public class Evaluation {
         this.comment = comment;
         this.mentor = mentor;
         this.student = student;
+        this.stream = stream;
     }
 
     @Id

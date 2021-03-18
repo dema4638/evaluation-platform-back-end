@@ -2,7 +2,6 @@ package com.swedbank.academy.evaluationplatform.mentor;
 
 import com.swedbank.academy.evaluationplatform.mentor.exceptions.MentorNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -53,6 +52,4 @@ public class MentorServiceImpl implements MentorService {
     public void addMentor(Mentor mentor) {
         this.mentorRepository.save(mentor);
     }
-
-
 }

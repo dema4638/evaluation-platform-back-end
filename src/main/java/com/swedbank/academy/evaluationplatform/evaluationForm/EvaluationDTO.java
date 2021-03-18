@@ -2,8 +2,8 @@ package com.swedbank.academy.evaluationplatform.evaluationForm;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
-public class EvaluationFormDTO {
-    private Long formId;
+public class EvaluationDTO {
+    private Long id;
     private long mentorID;
     private int participation;
     private int techSkills;
@@ -13,7 +13,7 @@ public class EvaluationFormDTO {
     private long studentId;
 
     @JsonCreator
-    public EvaluationFormDTO(long mentorID, int participation, int techSkills, int learningPace, int extraMile, String comment, long studentId) {
+    public EvaluationDTO(long mentorID, int participation, int techSkills, int learningPace, int extraMile, String comment, long studentId) {
         this.mentorID = mentorID;
         this.participation = participation;
         this.techSkills = techSkills;
@@ -23,9 +23,9 @@ public class EvaluationFormDTO {
         this.studentId = studentId;
     }
 
-    public EvaluationFormDTO(Long formId, long mentorID, int participation, int techSkills, int learningPace, int extraMile, String comment, long studentId) {
+    public EvaluationDTO(Long formId, long mentorID, int participation, int techSkills, int learningPace, int extraMile, String comment, long studentId) {
         this(mentorID, participation, techSkills, learningPace, extraMile, comment, studentId);
-        this.formId = formId;
+        this.id = formId;
     }
 
     public long getMentorID() {
@@ -57,8 +57,8 @@ public class EvaluationFormDTO {
         return studentId;
     }
 
-    public Long getFormId() {
-        return formId;
+    public Long getId() {
+        return id;
     }
 
 }

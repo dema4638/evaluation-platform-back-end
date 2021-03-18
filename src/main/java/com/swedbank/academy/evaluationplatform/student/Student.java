@@ -1,5 +1,5 @@
 package com.swedbank.academy.evaluationplatform.student;
-import com.swedbank.academy.evaluationplatform.studentMentor.StudentMentor;
+import com.swedbank.academy.evaluationplatform.evaluationForm.Evaluation;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -26,5 +26,5 @@ public class Student {
     }
 
     @OneToMany(mappedBy = "student")
-    Set<StudentMentor> StudentsMentors;
+    Set<Evaluation> evaluationForms;
 }

@@ -1,6 +1,8 @@
 package com.swedbank.academy.evaluationplatform.evaluationForm;
 
-import com.swedbank.academy.evaluationplatform.studentMentor.StudentMentor;
+import com.swedbank.academy.evaluationplatform.mentor.Mentor;
+import com.swedbank.academy.evaluationplatform.mentor.Stream;
+import com.swedbank.academy.evaluationplatform.student.Student;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,15 +14,16 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @Getter
-public class EvaluationForm {
+public class Evaluation {
 
-    public EvaluationForm(StudentMentor studentMentor, int participation, int techSkills, int learningPace, int extraMile, String comment) {
-        this.studentMentor = studentMentor;
+    public Evaluation(int participation, int techSkills, int learningPace, int extraMile, String comment, Mentor mentor, Student student) {
         this.participation = participation;
         this.techSkills = techSkills;
         this.learningPace = learningPace;
         this.extraMile = extraMile;
         this.comment = comment;
+        this.mentor = mentor;
+        this.student = student;
     }
 
     @Id
@@ -28,10 +31,13 @@ public class EvaluationForm {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "evaluationForm_sequence")
     private long id;
 
+    @ManyToOne
+    @JoinColumn(name = "mentor_id")
+    private Mentor mentor;
 
-    @OneToOne(cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "student_mentor_id", referencedColumnName = "id")
-    private StudentMentor studentMentor;
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private Student student;
 
     @Column(name = "participation")
     private int participation;
@@ -49,12 +55,12 @@ public class EvaluationForm {
     @Column(name = "comment")
     private String comment;
 
+    @Column(name = "stream")
+    private Stream stream;
+
+
     public long getId() {
         return id;
-    }
-
-    public StudentMentor getStudentMentor() {
-        return studentMentor;
     }
 
     public int getParticipation() {

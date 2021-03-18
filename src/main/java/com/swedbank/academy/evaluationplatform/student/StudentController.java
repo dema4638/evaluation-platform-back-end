@@ -22,7 +22,7 @@ public class StudentController {
     public ResponseEntity<StudentDTO> getStudent(@PathVariable long id) {
         try {
             StudentDTO studentDTO = studentService.getStudentByID(id);
-            return new ResponseEntity<StudentDTO>(studentDTO, HttpStatus.OK);
+            return new ResponseEntity<>(studentDTO, HttpStatus.OK);
         } catch (StudentNotFoundException e) {
             return ResponseEntity.notFound().build();
         }

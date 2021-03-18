@@ -1,13 +1,12 @@
 package com.swedbank.academy.evaluationplatform.mentor;
 
-import com.swedbank.academy.evaluationplatform.studentMentor.StudentMentor;
+import com.swedbank.academy.evaluationplatform.evaluationForm.Evaluation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -27,24 +26,24 @@ public class Mentor {
     private Stream stream;
 
     @OneToMany(mappedBy = "mentor")
-    Set<StudentMentor> studentsMentors;
+    Set<Evaluation> evaluationForms;
 
-    public Set<StudentMentor> StudentsMentors() {
-        return studentsMentors;
-    }
+//    public Set<StudentMentor> StudentsMentors() {
+//        return studentsMentors;
+//    }
 
-    public Set<StudentMentor> getStudentsMentors(Integer isEvaluated){
-        Set<StudentMentor> evaluatedStudentsMentors = new HashSet<StudentMentor>();
-        for (StudentMentor student : studentsMentors){
-            if (student.isEvaluated().equals(isEvaluated)){
-                evaluatedStudentsMentors.add(student);
-            }
-        }
-        return evaluatedStudentsMentors;
-    }
-
-    public Set<StudentMentor> getStudentsMentors() {
-        return studentsMentors;
-    }
+//    public Set<StudentMentor> getStudentsMentors(Integer isEvaluated){
+//        Set<StudentMentor> evaluatedStudentsMentors = new HashSet<StudentMentor>();
+//        for (StudentMentor student : studentsMentors){
+//            if (student.isEvaluated().equals(isEvaluated)){
+//                evaluatedStudentsMentors.add(student);
+//            }
+//        }
+//        return evaluatedStudentsMentors;
+//    }
+//
+//    public Set<StudentMentor> getStudentsMentors() {
+//        return studentsMentors;
+//    }
 
 }

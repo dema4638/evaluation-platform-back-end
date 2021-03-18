@@ -19,10 +19,9 @@ public class StudentMentorController {
     }
 
     @GetMapping(produces = "application/json")
+    @CrossOrigin(origins ="*", allowedHeaders ="*")
     public ResponseEntity<List<StudentMentor>> getStudentsMentors(@PathVariable long mentorId) {
         List<StudentMentor> studentsMentor = studentMentorService.getStudentsMentor();
         return new ResponseEntity<List<StudentMentor>>(studentsMentor, HttpStatus.OK);
     }
-
-
 }

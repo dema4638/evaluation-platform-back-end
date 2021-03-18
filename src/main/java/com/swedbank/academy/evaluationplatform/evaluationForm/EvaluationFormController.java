@@ -25,6 +25,7 @@ public class EvaluationFormController {
     }
 
     @GetMapping("{id}")
+    @CrossOrigin(origins ="*", allowedHeaders ="*")
     public ResponseEntity<EvaluationFormDTO>getEvaluationForm(@PathVariable long id){
         EvaluationForm evaluationForm = this.evaluationFormService.getEvaluationForm(id);
         long formId= evaluationForm.getId();
@@ -40,6 +41,7 @@ public class EvaluationFormController {
     }
 
     @PostMapping(consumes = "application/json",produces = "application/json")
+    @CrossOrigin(origins ="*", allowedHeaders ="*")
     public ResponseEntity<?>createEvaluationForm(@RequestBody EvaluationFormDTO evaluationFormDTO) {
         long mentorId = evaluationFormDTO.getMentorID();
         long studentId = evaluationFormDTO.getStudentId();
@@ -66,6 +68,7 @@ public class EvaluationFormController {
 //    }
 
     @GetMapping(produces = "application/json")
+    @CrossOrigin(origins ="*", allowedHeaders ="*")
     public ResponseEntity<Void>getEvaluationForm(@RequestBody EvaluationForm evaluationForm) {
         this.evaluationFormService.createEvaluationForm(evaluationForm);
         return ResponseEntity.ok().build();

@@ -29,12 +29,14 @@ public class MentorController {
     }
 
     @GetMapping(produces = "application/json")
+    @CrossOrigin(origins ="*", allowedHeaders ="*")
     public ResponseEntity<Set<MentorDTO>> getMentors(){
         Set<MentorDTO> mentors = mentorService.getMentors();
         return new ResponseEntity<>(mentors, HttpStatus.OK);
     }
 
     @GetMapping("{id}")
+    @CrossOrigin(origins ="*", allowedHeaders ="*")
     public ResponseEntity<MentorDTO> getMentors(@PathVariable long id){
         try {
             MentorDTO mentor = mentorService.getMentorById(id);
@@ -45,23 +47,27 @@ public class MentorController {
     }
 
     @GetMapping("{id}/student")
+    @CrossOrigin(origins ="*", allowedHeaders ="*")
     public ResponseEntity<Set<MentorStudentDTO>> getStudents(@PathVariable long id, @RequestParam(required = false) Integer isEvaluated){
         return new ResponseEntity<>(mentorService.getMentorsStudents(id, isEvaluated), HttpStatus.OK);
     }
 
     @GetMapping("{mentorId}/student/{studentMentorID}/evaluationForm/{formId}")
+    @CrossOrigin(origins ="*", allowedHeaders ="*")
     public ResponseEntity<EvaluationForm> getEvaluationForms(@PathVariable long mentorId, @PathVariable long studentMentorID, @PathVariable long formId){
         EvaluationForm evaluationForm = evaluationFormService.getEvaluationForm(formId);
         return new ResponseEntity<EvaluationForm>(evaluationForm, HttpStatus.OK);
     }
 
     @GetMapping("{mentorId}/student/{studentId}/evaluation")
+    @CrossOrigin(origins ="*", allowedHeaders ="*")
     public ResponseEntity<EvaluationFormDTO> getEvaluationForms(@PathVariable long mentorId, @PathVariable long studentId){
         EvaluationFormDTO evaluation = evaluationFormService.getEvaluationFormByIds(mentorId, studentId);
         return new ResponseEntity<EvaluationFormDTO>(evaluation, HttpStatus.OK);
     }
 
     @PostMapping("{mentorId}/student/{studentId}/evaluationForm")
+    @CrossOrigin(origins ="*", allowedHeaders ="*")
         public ResponseEntity<Void>createEvaluationForm(@RequestBody EvaluationForm evaluationForm, @PathVariable long mentorId, @PathVariable long studentId){
         StudentMentor studentMentor = studentMentorService.getStudentMentorByIds(mentorId, studentId);
         evaluationFormService.createEvaluationForm(evaluationForm);
@@ -70,6 +76,7 @@ public class MentorController {
     }
 
     @PostMapping(consumes = "application/json")
+    @CrossOrigin(origins ="*", allowedHeaders ="*")
     public ResponseEntity<Void> addMentor(@RequestBody Mentor mentor){
         mentorService.addMentor(mentor);
         return ResponseEntity.ok().build();

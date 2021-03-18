@@ -17,6 +17,7 @@ public class StudentController {
     }
 
     @GetMapping("{id}")
+    @CrossOrigin(origins ="*", allowedHeaders ="*")
     public ResponseEntity<StudentDTO> getStudent(@PathVariable long id) {
         try {
             StudentDTO studentDTO = studentService.getStudentByID(id);

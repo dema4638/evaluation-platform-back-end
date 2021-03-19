@@ -1,7 +1,6 @@
 package com.swedbank.academy.evaluationplatform.evaluation;
 
 import com.swedbank.academy.evaluationplatform.mentor.Mentor;
-import com.swedbank.academy.evaluationplatform.mentor.Stream;
 import com.swedbank.academy.evaluationplatform.student.Student;
 import lombok.Data;
 import lombok.Getter;
@@ -18,7 +17,8 @@ import javax.validation.constraints.Size;
 @Getter
 public class Evaluation {
 
-    public Evaluation(int participation, int techSkills, int learningPace, int extraMile, String comment, Mentor mentor, Student student, Stream stream) {
+
+    public Evaluation(int participation, int techSkills, int learningPace, int extraMile, String comment, Mentor mentor, Student student, String stream) {
         this.participation = participation;
         this.techSkills = techSkills;
         this.learningPace = learningPace;
@@ -69,7 +69,7 @@ public class Evaluation {
 
     @Column(name = "stream")
     @NotNull
-    private Stream stream;
+    private String stream;
 
 
     public long getId() {

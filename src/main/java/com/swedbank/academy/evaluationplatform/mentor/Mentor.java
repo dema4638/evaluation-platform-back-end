@@ -26,7 +26,7 @@ public class Mentor {
     private String name;
     @Column(name = "stream")
     @NotNull
-    private Stream stream;
+    private String stream;
 
     @OneToMany(mappedBy = "mentor")
     Set<Evaluation> evaluationForms;

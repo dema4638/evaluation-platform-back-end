@@ -32,14 +32,14 @@ public class EvaluationController {
         try {
             mentor = mentorService.getMentor(evaluationDTO.getMentorID());
         } catch (MentorNotFoundException e){
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.badRequest().build();
         }
         try {
             Student student = studentService.getStudent(evaluationDTO.getStudentId());
             evaluationService.createEvaluation(evaluationDTO, mentor, student);
             return ResponseEntity.ok().build();
         } catch (StudentNotFoundException e) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.badRequest().build();
         }
         }
 }

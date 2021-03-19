@@ -19,10 +19,13 @@ public class Mentor {
     @Id
     @SequenceGenerator(name = "mentor_sequence", sequenceName = "mentor_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mentor_sequence")
+    @NotNull
     private long id;
     @Column(name = "name")
-    @NotNull private String name;
+    @NotNull
+    private String name;
     @Column(name = "stream")
+    @NotNull
     private Stream stream;
 
     @OneToMany(mappedBy = "mentor")

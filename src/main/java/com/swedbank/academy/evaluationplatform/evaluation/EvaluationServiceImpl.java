@@ -1,10 +1,12 @@
 package com.swedbank.academy.evaluationplatform.evaluation;
 
+import com.swedbank.academy.evaluationplatform.evaluation.exceptions.EvaluationNotFoundException;
 import com.swedbank.academy.evaluationplatform.mentor.Mentor;
 import com.swedbank.academy.evaluationplatform.student.Student;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class EvaluationServiceImpl implements EvaluationService {
@@ -16,9 +18,12 @@ public class EvaluationServiceImpl implements EvaluationService {
     }
 
     @Override
-    public Evaluation getEvaluation(long id) {
-
-        return evaluationFormRepository.findById(id).get();
+    public Evaluation getEvaluation(long id) throws EvaluationNotFoundException{
+        try {
+            return evaluationFormRepository.findById(id).get();
+        } catch (NoSuchElementException e){
+            throw new EvaluationNotFoundException("Evaluation with given ID does not exist");
+        }
     }
 
     @Override
@@ -33,7 +38,7 @@ public class EvaluationServiceImpl implements EvaluationService {
     }
 
     @Override
-    public EvaluationDTO getEvaluationByIds(long mentor_id, long student_id) {
+    public EvaluationDTO getEvaluationByIds(long mentor_id, long student_id) throws EvaluationNotFoundException {
         List<Evaluation> evaluations = evaluationFormRepository.findAll();
         for (Evaluation evaluation : evaluations) {
             if (evaluation.getStudent().getId()==student_id){
@@ -42,7 +47,7 @@ public class EvaluationServiceImpl implements EvaluationService {
                 }
             }
         }
-        return null;
+        throw new EvaluationNotFoundException("Evaluation with given IDs does not exist");
     }
 
     @Override

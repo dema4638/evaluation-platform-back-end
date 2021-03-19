@@ -4,7 +4,10 @@ import com.swedbank.academy.evaluationplatform.evaluation.EvaluationService;
 import com.swedbank.academy.evaluationplatform.student.exception.StudentNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -73,7 +76,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public StudentDTO getStudentDTO(Student student) {
+    public StudentDTO getStudentDTO(@Valid Student student) {
         String name = student.getName();
         String image = student.getImage();
         long id = student.getId();

@@ -44,8 +44,12 @@ public class MentorServiceImpl implements MentorService {
     }
 
     @Override
-    public Mentor getMentor(long id) {
-        return mentorRepository.findById(id).get();
+    public Mentor getMentor(long id) throws MentorNotFoundException {
+        try {
+            return mentorRepository.findById(id).get();
+        } catch (NoSuchElementException e) {
+            throw new MentorNotFoundException("Mentor with given ID does not exist");
+        }
     }
 
     @Override

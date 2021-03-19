@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table
@@ -30,33 +32,43 @@ public class Evaluation {
     @Id
     @SequenceGenerator(name = "evaluationForm_sequence", sequenceName = "evaluationForm_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "evaluationForm_sequence")
+    @NotNull
     private long id;
 
     @ManyToOne
     @JoinColumn(name = "mentor_id")
+    @NotNull
     private Mentor mentor;
 
     @ManyToOne
     @JoinColumn(name = "student_id")
+    @NotNull
     private Student student;
 
     @Column(name = "participation")
+    @NotNull
     private int participation;
 
     @Column(name = "tech_skills")
+    @NotNull
     private int techSkills;
 
 
     @Column(name = "learning_pace")
+    @NotNull
     private int learningPace;
 
     @Column(name = "extra_mile")
+    @NotNull
     private int extraMile;
 
     @Column(name = "comment")
+    @NotNull
+    @Max(160)
     private String comment;
 
     @Column(name = "stream")
+    @NotNull
     private Stream stream;
 
 

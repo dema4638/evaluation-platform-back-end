@@ -2,8 +2,8 @@ package com.swedbank.academy.evaluationplatform.mentor;
 
 import com.swedbank.academy.evaluationplatform.evaluation.EvaluationDTO;
 import com.swedbank.academy.evaluationplatform.evaluation.EvaluationService;
+import com.swedbank.academy.evaluationplatform.evaluation.exceptions.EvaluationNotFoundException;
 import com.swedbank.academy.evaluationplatform.mentor.exceptions.MentorNotFoundException;
-import com.swedbank.academy.evaluationplatform.student.Student;
 import com.swedbank.academy.evaluationplatform.student.StudentDTO;
 import com.swedbank.academy.evaluationplatform.student.StudentService;
 import org.springframework.http.HttpStatus;
@@ -47,8 +47,12 @@ public class MentorController {
 
     @GetMapping("{mentorId}/student/{studentId}/evaluation")
     public ResponseEntity<EvaluationDTO> getEvaluationForms(@PathVariable long mentorId, @PathVariable long studentId){
-        EvaluationDTO evaluation = evaluationService.getEvaluationByIds(mentorId, studentId);
-        return new ResponseEntity<EvaluationDTO>(evaluation, HttpStatus.OK);
+        try {
+            EvaluationDTO evaluation = evaluationService.getEvaluationByIds(mentorId, studentId);
+            return new ResponseEntity<EvaluationDTO>(evaluation, HttpStatus.OK);
+        } catch (EvaluationNotFoundException e){
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("{mentorId}/student")

@@ -14,10 +14,6 @@ public interface StudentService {
 
     public Student getStudent(long id) throws StudentNotFoundException;
 
-//    public List<StudentDTO> getEvaluatedStudents(long mentorId);
-//
-//    public List<StudentDTO> getNotEvaluatedStudents(long mentorId);
-
     public StudentDTO getStudentDTO(Student student, Mentor mentor);
 
 }

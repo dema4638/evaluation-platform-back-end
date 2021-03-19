@@ -27,7 +27,7 @@ public class StudentServiceImpl implements StudentService {
         Student student;
         try {
             student = studentRepository.findById(id).get();
-            return new StudentDTO(student.getId(), student.getName(), student.getImage(), null);
+            return new StudentDTO(student.getId(), student.getName(), student.getImage());
         } catch (NoSuchElementException e) {
             throw new StudentNotFoundException("Student with given ID does not exist");
         }
@@ -58,7 +58,6 @@ public class StudentServiceImpl implements StudentService {
     public StudentDTO getStudentDTO(@Valid Student student, Mentor mentor) {
         String name = student.getName();
         String image = student.getImage();
-        boolean isEvaluated = false;
         long id = student.getId();
             if (evaluationService.checkIfEvaluationExists(mentor.getId(),student.getId())){
                 return new StudentDTO(id, name, image, true);

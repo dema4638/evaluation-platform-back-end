@@ -2,7 +2,7 @@ package com.swedbank.academy.evaluationplatform.mentor;
 
 public enum Stream {
 
-    Back_End("Back-End"), Front_End("Front-End"), Quality_Assurance("Quality Assurance");
+    BACKEND("Back-end"), FRONTEND("Front-end"), QA("QA");
 
     private String displayValue;
 

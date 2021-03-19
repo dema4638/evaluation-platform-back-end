@@ -29,8 +29,6 @@ public class Student {
     public Student() {
     }
 
-
-
     @OneToMany(mappedBy = "student")
     Set<Evaluation> evaluationForms;
 }

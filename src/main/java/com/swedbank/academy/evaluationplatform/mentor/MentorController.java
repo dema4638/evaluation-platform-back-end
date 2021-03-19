@@ -56,12 +56,12 @@ public class MentorController {
     }
 
     @GetMapping("{mentorId}/student")
-    public ResponseEntity<List<StudentDTO>> getStudents(@PathVariable long mentorId, @RequestParam(required = false) Integer isEvaluated){
+    public ResponseEntity<List<StudentDTO>> getStudents(@PathVariable long mentorId, @RequestParam(required = false) Boolean isEvaluated){
         List<StudentDTO> students;
         if (isEvaluated == null){
             students = studentService.getAllStudents();
         }
-        else if (isEvaluated == 1){
+        else if (isEvaluated){
             System.out.println("Yes");
             students = studentService.getEvaluatedStudents(mentorId);
 

@@ -55,21 +55,19 @@ public class MentorController {
         }
     }
 
+
     @GetMapping("{mentorId}/student")
-    public ResponseEntity<List<StudentDTO>> getStudents(@PathVariable long mentorId, @RequestParam(required = false) Boolean isEvaluated){
+    public ResponseEntity<List<StudentDTO>> getStudents(@PathVariable long mentorId) {
         List<StudentDTO> students;
-        if (isEvaluated == null){
-            students = studentService.getAllStudents();
+        Mentor mentor;
+        try {
+            mentor = mentorService.getMentor(mentorId);
+            students = studentService.getAllStudents(mentor);
+            return new ResponseEntity<>(students, HttpStatus.OK);
+        } catch (MentorNotFoundException e) {
+            e.printStackTrace();
         }
-        else if (isEvaluated){
-            System.out.println("Yes");
-            students = studentService.getEvaluatedStudents(mentorId);
-
-        }else {
-            students = studentService.getNotEvaluatedStudents(mentorId);
-        }
-
-        return new ResponseEntity<List<StudentDTO>>(students, HttpStatus.OK);
+        return ResponseEntity.notFound().build();
     }
 
 }

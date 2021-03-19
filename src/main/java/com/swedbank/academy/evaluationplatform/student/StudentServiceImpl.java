@@ -1,13 +1,16 @@
 package com.swedbank.academy.evaluationplatform.student;
 
 import com.swedbank.academy.evaluationplatform.evaluation.EvaluationService;
+import com.swedbank.academy.evaluationplatform.mentor.Mentor;
 import com.swedbank.academy.evaluationplatform.student.exception.StudentNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -24,7 +27,7 @@ public class StudentServiceImpl implements StudentService {
         Student student;
         try {
             student = studentRepository.findById(id).get();
-            return new StudentDTO(student.getId(), student.getName(), student.getImage());
+            return new StudentDTO(student.getId(), student.getName(), student.getImage(), null);
         } catch (NoSuchElementException e) {
             throw new StudentNotFoundException("Student with given ID does not exist");
         }
@@ -41,47 +44,26 @@ public class StudentServiceImpl implements StudentService {
         }
     }
 
-    public List<StudentDTO> getAllStudents(){
+    public List<StudentDTO> getAllStudents(Mentor mentor){
         List<Student> students = studentRepository.findAll();
         List<StudentDTO> studentsDTO = new ArrayList<>();
         for (Student student: students){
-            studentsDTO.add(getStudentDTO(student));
+            studentsDTO.add(getStudentDTO(student, mentor));
         }
         return studentsDTO;
     }
 
-    @Override
-    public List<StudentDTO> getEvaluatedStudents(long mentorId) {
-        List<Student> students = studentRepository.findAll();
-        List<StudentDTO> evaluatedStudents = new ArrayList<>();
-        for (Student student : students) {
-            if (evaluationService.checkIfEvaluationExists(mentorId, student.getId())) {
-                System.out.println("yes");
-                evaluatedStudents.add(getStudentDTO(student));
-            }
-        }
-        return evaluatedStudents;
-    }
 
     @Override
-    public List<StudentDTO> getNotEvaluatedStudents(long mentorId) {
-        List<Student> students = studentRepository.findAll();
-        List<StudentDTO> notEvaluatedStudentsDTO = new ArrayList<>();
-        for (Student student : students) {
-            if (!evaluationService.checkIfEvaluationExists(mentorId, student.getId())) {
-                notEvaluatedStudentsDTO.add(getStudentDTO(student));
-            }
-        }
-        return notEvaluatedStudentsDTO;
-    }
-
-    @Override
-    public StudentDTO getStudentDTO(@Valid Student student) {
+    public StudentDTO getStudentDTO(@Valid Student student, Mentor mentor) {
         String name = student.getName();
         String image = student.getImage();
+        boolean isEvaluated = false;
         long id = student.getId();
-        return new StudentDTO(id, name, image);
-
+            if (evaluationService.checkIfEvaluationExists(mentor.getId(),student.getId())){
+                return new StudentDTO(id, name, image, true);
+            }
+        return new StudentDTO(id, name, image, false);
     }
 
 }

@@ -1,9 +1,7 @@
 package com.swedbank.academy.evaluationplatform.mentor;
 
 import com.swedbank.academy.evaluationplatform.evaluation.Evaluation;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,8 +10,6 @@ import java.util.Set;
 @Entity
 @Table
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Mentor {
 
     @Id
@@ -26,7 +22,17 @@ public class Mentor {
     private String name;
     @Column(name = "stream")
     @NotNull
-    private String stream;
+    private Stream stream;
+
+    public Mentor() {
+    }
+
+    public Mentor(@NotNull long id, @NotNull String name, @NotNull Stream stream, Set<Evaluation> evaluationForms) {
+        this.id = id;
+        this.name = name;
+        this.stream = stream;
+        this.evaluationForms = evaluationForms;
+    }
 
     @OneToMany(mappedBy = "mentor")
     Set<Evaluation> evaluationForms;

@@ -56,4 +56,9 @@ public class MentorServiceImpl implements MentorService {
     public void addMentor(Mentor mentor) {
         this.mentorRepository.save(mentor);
     }
+
+    @Override
+    public void deleteMentor(Mentor mentor) {
+        this.mentorRepository.delete(mentor);
+    }
 }

@@ -1,8 +1,10 @@
 package com.swedbank.academy.evaluationplatform.student;
 
+import com.swedbank.academy.evaluationplatform.evaluation.Evaluation;
 import com.swedbank.academy.evaluationplatform.evaluation.EvaluationService;
 import com.swedbank.academy.evaluationplatform.mentor.Mentor;
 import com.swedbank.academy.evaluationplatform.student.exception.StudentNotFoundException;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
@@ -16,6 +18,7 @@ import java.util.NoSuchElementException;
 public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
     private EvaluationService evaluationService;
+
 
     public StudentServiceImpl(StudentRepository studentRepository, EvaluationService evaluationService) {
         this.studentRepository = studentRepository;

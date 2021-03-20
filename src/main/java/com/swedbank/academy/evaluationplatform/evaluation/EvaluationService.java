@@ -9,5 +9,5 @@ public interface EvaluationService {
     public void createEvaluation(EvaluationDTO evaluationFormDTO, Mentor mentor, Student student);
     public EvaluationDTO getEvaluationByIds(long mentor_id, long student_id) throws EvaluationNotFoundException;
     public boolean checkIfEvaluationExists(long mentorId, long studentId);
-
+    public BEEvaluationDTO getJointEvaluation(long studentId);
 }

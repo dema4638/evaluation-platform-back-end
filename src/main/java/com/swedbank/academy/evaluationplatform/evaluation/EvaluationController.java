@@ -48,6 +48,7 @@ public class EvaluationController {
     }
 
     @PutMapping("{id}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*", methods = RequestMethod.PUT)
     public ResponseEntity<?> updateEvaluation(@RequestBody EvaluationDTO evaluationDTO, @PathVariable long id) {
         try {
             Evaluation evaluation = evaluationService.getEvaluation(id);

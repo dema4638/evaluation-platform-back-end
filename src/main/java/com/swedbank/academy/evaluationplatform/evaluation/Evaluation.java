@@ -3,8 +3,6 @@ package com.swedbank.academy.evaluationplatform.evaluation;
 import com.swedbank.academy.evaluationplatform.mentor.Mentor;
 import com.swedbank.academy.evaluationplatform.mentor.Stream;
 import com.swedbank.academy.evaluationplatform.student.Student;
-import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -13,9 +11,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table
-@Data
 @NoArgsConstructor
-@Getter
 public class Evaluation {
 
 
@@ -72,13 +68,24 @@ public class Evaluation {
     @NotNull
     private Stream stream;
 
-
     public long getId() {
         return id;
     }
 
+    public Mentor getMentor() {
+        return mentor;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
     public int getParticipation() {
         return participation;
+    }
+
+    public int getTechSkills() {
+        return techSkills;
     }
 
     public int getLearningPace() {
@@ -93,9 +100,7 @@ public class Evaluation {
         return comment;
     }
 
-    public int getTechSkills() {
-        return techSkills;
+    public Stream getStream() {
+        return stream;
     }
-
-
 }

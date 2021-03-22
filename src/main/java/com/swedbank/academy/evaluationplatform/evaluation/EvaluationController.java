@@ -1,6 +1,5 @@
 package com.swedbank.academy.evaluationplatform.evaluation;
 
-import com.swedbank.academy.evaluationplatform.evaluation.exceptions.EvaluationNotFoundException;
 import com.swedbank.academy.evaluationplatform.mentor.Mentor;
 import com.swedbank.academy.evaluationplatform.mentor.MentorService;
 import com.swedbank.academy.evaluationplatform.mentor.exceptions.MentorNotFoundException;
@@ -46,18 +45,26 @@ public class EvaluationController {
         }
     }
 
-    @PutMapping("/api/evaluation/{id}")
-    public ResponseEntity<?> updateEvaluation(@RequestBody EvaluationDTO evaluationDTO) {
+    //    @PostMapping(consumes = "application/json", produces = "application/json")
+//    @CrossOrigin(origins = "*", allowedHeaders = "*", methods = RequestMethod.PUT)
 
+
+    @PutMapping("{id}")
+    public ResponseEntity<?> updateEvaluation(@RequestBody EvaluationDTO evaluationDTO) {
+        Mentor mentor;
         try {
-            long mentorID = evaluationDTO.getMentorID();
-            long studentID = evaluationDTO.getStudentId();
-            EvaluationDTO oldEvaluation = evaluationService.getEvaluationByIds(mentorID, studentID);
-            evaluationService.updateEvaluation(oldEvaluation, evaluationDTO);
-            return ResponseEntity.ok().build();
-        } catch (EvaluationNotFoundException e) {
+            mentor = mentorService.getMentor(evaluationDTO.getMentorID());
+        } catch (MentorNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
+        try {
+            Student student = studentService.getStudent(evaluationDTO.getStudentId());
+            evaluationService.updateEvaluation(evaluationDTO, mentor, student);
+            return ResponseEntity.ok().build();
+        } catch (StudentNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+
     }
 
 }

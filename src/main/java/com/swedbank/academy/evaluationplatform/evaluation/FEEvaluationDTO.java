@@ -2,7 +2,7 @@ package com.swedbank.academy.evaluationplatform.evaluation;
 
 import java.util.List;
 
-public class FEEvaluationDTO{
+public class FEEvaluationDTO implements StreamEvaluationDTO{
     private Double participation;
     private Double techSkills;
     private Double learningPace;

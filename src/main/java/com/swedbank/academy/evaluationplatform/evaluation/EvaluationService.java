@@ -10,4 +10,5 @@ public interface EvaluationService {
     public EvaluationDTO getEvaluationByIds(long mentor_id, long student_id) throws EvaluationNotFoundException;
     public boolean checkIfEvaluationExists(long mentorId, long studentId);
     public JointEvaluationDTO getJointEvaluation(long studentId);
+    public void updateEvaluation(EvaluationDTO oldEvaluation, EvaluationDTO newEvaluation);
 }

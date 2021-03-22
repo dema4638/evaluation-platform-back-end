@@ -61,4 +61,35 @@ public class EvaluationDTO {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setMentorID(long mentorID) {
+        this.mentorID = mentorID;
+    }
+
+    public void setParticipation(int participation) {
+        this.participation = participation;
+    }
+
+    public void setTechSkills(int techSkills) {
+        this.techSkills = techSkills;
+    }
+
+    public void setLearningPace(int learningPace) {
+        this.learningPace = learningPace;
+    }
+
+    public void setExtraMile(int extraMile) {
+        this.extraMile = extraMile;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public void setStudentId(long studentId) {
+        this.studentId = studentId;
+    }
 }

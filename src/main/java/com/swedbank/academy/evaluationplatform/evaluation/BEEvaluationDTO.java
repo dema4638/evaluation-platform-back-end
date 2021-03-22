@@ -5,15 +5,15 @@ import java.util.List;
 
 public class BEEvaluationDTO {
 
-    private double participation;
-    private double techSkills;
-    private double learningPace;
-    private double extraMile;
+    private Double participation;
+    private Double techSkills;
+    private Double learningPace;
+    private Double extraMile;
     private List<String> comments;
-    private double evaluationsCount;
-    private double jointEvaluation;
+    private Double evaluationsCount;
+    private Double jointEvaluation;
 
-    public BEEvaluationDTO(double participation, double techSkills, double learningPace, double extraMile, List<String> comments, double evaluationsCount, double jointEvaluation) {
+    public BEEvaluationDTO(Double participation, Double techSkills, Double learningPace, Double extraMile, List<String> comments, Double evaluationsCount, Double jointEvaluation) {
         this.participation = participation;
         this.techSkills = techSkills;
         this.learningPace = learningPace;
@@ -23,19 +23,19 @@ public class BEEvaluationDTO {
         this.jointEvaluation = jointEvaluation;
     }
 
-    public double getParticipation() {
+    public Double getParticipation() {
         return participation;
     }
 
-    public double getTechSkills() {
+    public Double getTechSkills() {
         return techSkills;
     }
 
-    public double getLearningPace() {
+    public Double getLearningPace() {
         return learningPace;
     }
 
-    public double getExtraMile() {
+    public Double getExtraMile() {
         return extraMile;
     }
 
@@ -43,11 +43,11 @@ public class BEEvaluationDTO {
         return comments;
     }
 
-    public double getEvaluationsCount() {
+    public Double getEvaluationsCount() {
         return evaluationsCount;
     }
 
-    public double getJointEvaluation() {
+    public Double getJointEvaluation() {
         return jointEvaluation;
     }
 }

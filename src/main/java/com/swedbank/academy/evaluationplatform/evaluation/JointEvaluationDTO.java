@@ -20,4 +20,20 @@ public class JointEvaluationDTO {
         this.beEvaluationDTO = beEvaluationDTO;
         this.feEvaluationDTO = feEvaluationDTO;
     }
+
+    public long getStudentId() {
+        return studentId;
+    }
+
+    public QAEvaluationDTO getQaEvaluationDTO() {
+        return qaEvaluationDTO;
+    }
+
+    public BEEvaluationDTO getBeEvaluationDTO() {
+        return beEvaluationDTO;
+    }
+
+    public FEEvaluationDTO getFeEvaluationDTO() {
+        return feEvaluationDTO;
+    }
 }

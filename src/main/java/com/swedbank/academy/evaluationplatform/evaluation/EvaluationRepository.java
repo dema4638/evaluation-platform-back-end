@@ -12,20 +12,20 @@ public interface EvaluationRepository extends JpaRepository<Evaluation, Long> {
     List<Evaluation> getEvaluationsByStream(Stream streamValue, long studentId);
 
     @Query("SELECT AVG(evaluation.participation) FROM Evaluation evaluation WHERE evaluation.stream = ?1 AND evaluation.student.id=?2")
-    double getAvgParticipationByStream(Stream streamValue, long studentId);
+    Double getAvgParticipationByStream(Stream streamValue, long studentId);
 
     @Query("SELECT AVG(evaluation.techSkills) FROM Evaluation evaluation WHERE evaluation.stream = ?1 AND evaluation.student.id=?2")
-    double getAvgTechSkillsByStream(Stream streamValue, long studentId);
+    Double getAvgTechSkillsByStream(Stream streamValue, long studentId);
 
     @Query("SELECT AVG(evaluation.learningPace) FROM Evaluation evaluation WHERE evaluation.stream = ?1 AND evaluation.student.id=?2")
-    double getAvgLearningPaceByStream(Stream streamValue, long studentId);
+    Double getAvgLearningPaceByStream(Stream streamValue, long studentId);
 
     @Query("SELECT AVG(evaluation.extraMile) FROM Evaluation evaluation WHERE evaluation.stream = ?1 AND evaluation.student.id=?2")
-    double getAvgExtraMileByStream(Stream streamValue, long studentId);
+    Double getAvgExtraMileByStream(Stream streamValue, long studentId);
 
     @Query("SELECT evaluation.comment FROM Evaluation evaluation WHERE evaluation.stream = ?1 AND evaluation.student.id=?2")
     List<String> getEvaluationCommentsByStream(Stream streamValue, long studentId);
 
     @Query("SELECT COUNT(evaluation) FROM Evaluation evaluation WHERE evaluation.stream = ?1 AND evaluation.student.id=?2")
-    double getEvaluationsCountByStream(Stream streamValue, long studentId);
+    Double getEvaluationsCountByStream(Stream streamValue, long studentId);
 }

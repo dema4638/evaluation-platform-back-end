@@ -74,42 +74,46 @@ public class EvaluationServiceImpl implements EvaluationService {
 
 
     public BEEvaluationDTO calculateBEEvaluationAvgValues(long studentId, Stream streamIndex){
+        Double evaluationsCount = evaluationFormRepository.getEvaluationsCountByStream(streamIndex, studentId);
+        if (evaluationsCount>0){
 
-        double participation = evaluationFormRepository.getAvgParticipationByStream(streamIndex, studentId);
-        double techSkills = evaluationFormRepository.getAvgTechSkillsByStream(streamIndex, studentId);
-        double learningPace = evaluationFormRepository.getAvgLearningPaceByStream(streamIndex, studentId);
-        double extraMile = evaluationFormRepository.getAvgExtraMileByStream(streamIndex,studentId);
+        Double participation = evaluationFormRepository.getAvgParticipationByStream(streamIndex, studentId);
+        Double techSkills = evaluationFormRepository.getAvgTechSkillsByStream(streamIndex, studentId);
+        Double learningPace = evaluationFormRepository.getAvgLearningPaceByStream(streamIndex, studentId);
+        Double extraMile = evaluationFormRepository.getAvgExtraMileByStream(streamIndex,studentId);
         List<String> comments = evaluationFormRepository.getEvaluationCommentsByStream(streamIndex, studentId);
-        double evaluationsCount = evaluationFormRepository.getEvaluationsCountByStream(streamIndex, studentId);
-        double jointEvaluation = (extraMile+learningPace+techSkills+participation)/4;
+        Double jointEvaluation = (extraMile+learningPace+techSkills+participation)/4;
         BEEvaluationDTO beEvaluationDTO = new BEEvaluationDTO(participation, techSkills, learningPace, extraMile, comments, evaluationsCount, jointEvaluation);
-        return beEvaluationDTO;
+        return beEvaluationDTO;}
+        return null;
     }
 
     public FEEvaluationDTO calculateFEEvaluationAvgValues(long studentId, Stream streamIndex){
-
-        double participation = evaluationFormRepository.getAvgParticipationByStream(streamIndex, studentId);
-        double techSkills = evaluationFormRepository.getAvgTechSkillsByStream(streamIndex, studentId);
-        double learningPace = evaluationFormRepository.getAvgLearningPaceByStream(streamIndex, studentId);
-        double extraMile = evaluationFormRepository.getAvgExtraMileByStream(streamIndex,studentId);
+        Double evaluationsCount = evaluationFormRepository.getEvaluationsCountByStream(streamIndex, studentId);
+        if (evaluationsCount>0){
+        Double participation = evaluationFormRepository.getAvgParticipationByStream(streamIndex, studentId);
+        Double techSkills = evaluationFormRepository.getAvgTechSkillsByStream(streamIndex, studentId);
+        Double learningPace = evaluationFormRepository.getAvgLearningPaceByStream(streamIndex, studentId);
+        Double extraMile = evaluationFormRepository.getAvgExtraMileByStream(streamIndex,studentId);
         List<String> comments = evaluationFormRepository.getEvaluationCommentsByStream(streamIndex, studentId);
-        double evaluationsCount = evaluationFormRepository.getEvaluationsCountByStream(streamIndex, studentId);
-        double jointEvaluation = (extraMile+learningPace+techSkills+participation)/4;
+        Double jointEvaluation = (extraMile+learningPace+techSkills+participation)/4;
         FEEvaluationDTO feEvaluationDTO = new FEEvaluationDTO(participation, techSkills, learningPace, extraMile, comments, evaluationsCount, jointEvaluation);
-        return feEvaluationDTO;
+        return feEvaluationDTO;}
+        return null;
     }
 
     public QAEvaluationDTO calculateQAEvaluationAvgValues(long studentId, Stream streamIndex){
-
-        double participation = evaluationFormRepository.getAvgParticipationByStream(streamIndex, studentId);
-        double techSkills = evaluationFormRepository.getAvgTechSkillsByStream(streamIndex, studentId);
-        double learningPace = evaluationFormRepository.getAvgLearningPaceByStream(streamIndex, studentId);
-        double extraMile = evaluationFormRepository.getAvgExtraMileByStream(streamIndex,studentId);
+        Double evaluationsCount = evaluationFormRepository.getEvaluationsCountByStream(streamIndex, studentId);
+        if (evaluationsCount>0){
+        Double participation = evaluationFormRepository.getAvgParticipationByStream(streamIndex, studentId);
+        Double techSkills = evaluationFormRepository.getAvgTechSkillsByStream(streamIndex, studentId);
+        Double learningPace = evaluationFormRepository.getAvgLearningPaceByStream(streamIndex, studentId);
+        Double extraMile = evaluationFormRepository.getAvgExtraMileByStream(streamIndex,studentId);
         List<String> comments = evaluationFormRepository.getEvaluationCommentsByStream(streamIndex, studentId);
-        double evaluationsCount = evaluationFormRepository.getEvaluationsCountByStream(streamIndex, studentId);
-        double jointEvaluation = (extraMile+learningPace+techSkills+participation)/4;
+        Double jointEvaluation = (extraMile+learningPace+techSkills+participation)/4;
         QAEvaluationDTO qaEvaluationDTO = new QAEvaluationDTO(participation, techSkills, learningPace, extraMile, comments, evaluationsCount, jointEvaluation);
-        return qaEvaluationDTO;
+        return qaEvaluationDTO;}
+        return null;
     }
 
 

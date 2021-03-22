@@ -96,4 +96,6 @@ public class Evaluation {
     public int getTechSkills() {
         return techSkills;
     }
+
+
 }

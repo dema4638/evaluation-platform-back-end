@@ -30,6 +30,18 @@ public class Evaluation {
         this.stream = stream;
     }
 
+    public Evaluation(long id, int participation, int techSkills, int learningPace, int extraMile, String comment, Mentor mentor, Student student, Stream stream) {
+        this.participation = participation;
+        this.techSkills = techSkills;
+        this.learningPace = learningPace;
+        this.extraMile = extraMile;
+        this.comment = comment;
+        this.mentor = mentor;
+        this.student = student;
+        this.stream = stream;
+        this.id = id;
+    }
+
     @Id
     @SequenceGenerator(name = "evaluationForm_sequence", sequenceName = "evaluationForm_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "evaluationForm_sequence")

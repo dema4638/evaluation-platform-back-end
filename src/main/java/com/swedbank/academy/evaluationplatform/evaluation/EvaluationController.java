@@ -5,6 +5,7 @@ import com.swedbank.academy.evaluationplatform.mentor.Mentor;
 import com.swedbank.academy.evaluationplatform.mentor.MentorService;
 import com.swedbank.academy.evaluationplatform.mentor.exceptions.MentorNotFoundException;
 import com.swedbank.academy.evaluationplatform.student.Student;
+import com.swedbank.academy.evaluationplatform.student.StudentDTO;
 import com.swedbank.academy.evaluationplatform.student.StudentService;
 import com.swedbank.academy.evaluationplatform.student.exception.StudentNotFoundException;
 import org.springframework.http.ResponseEntity;
@@ -46,18 +47,22 @@ public class EvaluationController {
         }
     }
 
-    @PutMapping("/api/evaluation/{id}")
-    public ResponseEntity<?> updateEvaluation(@RequestBody EvaluationDTO evaluationDTO) {
-
+    @PutMapping("{id}")
+    public ResponseEntity<?> updateEvaluation(@RequestBody EvaluationDTO evaluationDTO, @PathVariable long id) {
         try {
-            long mentorID = evaluationDTO.getMentorID();
-            long studentID = evaluationDTO.getStudentId();
-            EvaluationDTO oldEvaluation = evaluationService.getEvaluationByIds(mentorID, studentID);
-            evaluationService.updateEvaluation(oldEvaluation, evaluationDTO);
-            return ResponseEntity.ok().build();
+            Evaluation evaluation = evaluationService.getEvaluation(id);
+            try {
+                Mentor mentor = mentorService.getMentor(evaluation.getMentor().getId());
+                Student student = studentService.getStudent(evaluation.getStudent().getId());
+                evaluationService.updateEvaluation(evaluationDTO, mentor, student, id);
+                return ResponseEntity.ok().build();
+            } catch (MentorNotFoundException | StudentNotFoundException e) {
+                return ResponseEntity.notFound().build();
+            }
         } catch (EvaluationNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
     }
+
 
 }

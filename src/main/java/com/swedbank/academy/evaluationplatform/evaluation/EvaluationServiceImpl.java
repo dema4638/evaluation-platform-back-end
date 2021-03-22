@@ -108,16 +108,16 @@ public class EvaluationServiceImpl implements EvaluationService {
         return evaluationDTO;
     }
 
-    public void updateEvaluation(EvaluationDTO oldEvaluation, EvaluationDTO newEvaluation){
+    @Override
+    public void updateEvaluation(EvaluationDTO evaluationDTO, Mentor mentor, Student student, long id){
 
-        oldEvaluation.setId(newEvaluation.getId());
-        oldEvaluation.setStudentId(newEvaluation.getStudentId());
-        oldEvaluation.setMentorID(newEvaluation.getMentorID());
-        oldEvaluation.setComment(newEvaluation.getComment());
-        oldEvaluation.setParticipation(newEvaluation.getParticipation());
-        oldEvaluation.setTechSkills(newEvaluation.getTechSkills());
-        oldEvaluation.setLearningPace(newEvaluation.getLearningPace());
-        oldEvaluation.setExtraMile(newEvaluation.getExtraMile());
+        String comment = evaluationDTO.getComment();
+        int participation = evaluationDTO.getParticipation();
+        int techSkills = evaluationDTO.getTechSkills();
+        int learningPace = evaluationDTO.getLearningPace();
+        int extraMile = evaluationDTO.getExtraMile();
+        Evaluation evaluation = new Evaluation(id, participation, techSkills, learningPace, extraMile, comment, mentor, student, mentor.getStream());
+        evaluationFormRepository.save(evaluation);
 
     }
 

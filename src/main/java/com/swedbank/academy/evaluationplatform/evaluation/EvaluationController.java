@@ -68,5 +68,15 @@ public class EvaluationController {
         }
     }
 
-
+    @DeleteMapping("{id}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*", methods = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteEvaluation(@RequestBody EvaluationDTO evaluationDTO, @PathVariable long id) {
+        try{
+            Evaluation evaluation = evaluationService.getEvaluation(id);
+            evaluationService.deleteEvaluation(evaluationDTO, evaluation.getMentor().getId(), evaluation.getStudent().getId());
+            return ResponseEntity.ok().build();
+        } catch (EvaluationNotFoundException e){
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

@@ -28,7 +28,7 @@ public class EvaluationServiceImpl implements EvaluationService {
     }
 
     @Override
-    public void createEvaluation(EvaluationDTO evaluationDTO, Mentor mentor, Student student) {
+    public void createEvaluation(EvaluationDTO evaluationDTO, Mentor mentor, Student student){
         String comment = evaluationDTO.getComment();
         int participation = evaluationDTO.getParticipation();
         int techSkills = evaluationDTO.getTechSkills();

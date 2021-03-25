@@ -40,6 +40,9 @@ public class EvaluationController {
         }
         try {
             Student student = studentService.getStudent(evaluationDTO.getStudentId());
+            if(evaluationService.checkIfEvaluationExists(evaluationDTO.getMentorID(),evaluationDTO.getStudentId())){
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
+            }
             evaluationService.createEvaluation(evaluationDTO, mentor, student);
             return ResponseEntity.ok().build();
         } catch (StudentNotFoundException e) {

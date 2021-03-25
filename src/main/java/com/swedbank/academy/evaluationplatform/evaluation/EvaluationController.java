@@ -5,9 +5,9 @@ import com.swedbank.academy.evaluationplatform.mentor.Mentor;
 import com.swedbank.academy.evaluationplatform.mentor.MentorService;
 import com.swedbank.academy.evaluationplatform.mentor.exceptions.MentorNotFoundException;
 import com.swedbank.academy.evaluationplatform.student.Student;
-import com.swedbank.academy.evaluationplatform.student.StudentDTO;
 import com.swedbank.academy.evaluationplatform.student.StudentService;
 import com.swedbank.academy.evaluationplatform.student.exception.StudentNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,6 +40,9 @@ public class EvaluationController {
         }
         try {
             Student student = studentService.getStudent(evaluationDTO.getStudentId());
+            if(evaluationService.checkIfEvaluationExists(evaluationDTO.getMentorID(),evaluationDTO.getStudentId())){
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
+            }
             evaluationService.createEvaluation(evaluationDTO, mentor, student);
             return ResponseEntity.ok().build();
         } catch (StudentNotFoundException e) {

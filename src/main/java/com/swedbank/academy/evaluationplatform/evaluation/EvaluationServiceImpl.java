@@ -77,10 +77,10 @@ public class EvaluationServiceImpl implements EvaluationService {
         Double evaluationsCount = evaluationFormRepository.getEvaluationsCountByStream(streamIndex, studentId);
         if (evaluationsCount>0){
 
-            Double participation = evaluationFormRepository.getAvgParticipationByStream(streamIndex, studentId);
-            Double techSkills = evaluationFormRepository.getAvgTechSkillsByStream(streamIndex, studentId);
-            Double learningPace = evaluationFormRepository.getAvgLearningPaceByStream(streamIndex, studentId);
-            Double extraMile = evaluationFormRepository.getAvgExtraMileByStream(streamIndex,studentId);
+            Double participation = ((evaluationFormRepository.getAvgParticipationByStream(streamIndex, studentId))/3)*5;
+            Double techSkills = ((evaluationFormRepository.getAvgTechSkillsByStream(streamIndex, studentId))/3)*5;
+            Double learningPace = ((evaluationFormRepository.getAvgLearningPaceByStream(streamIndex, studentId))/3)*5;
+            Double extraMile = ((evaluationFormRepository.getAvgExtraMileByStream(streamIndex,studentId))/3)*5;
             List<String> comments = evaluationFormRepository.getEvaluationCommentsByStream(streamIndex, studentId);
             Double jointEvaluation = (extraMile+learningPace+techSkills+participation)/4;
             if (streamIndex==Stream.BACKEND) {

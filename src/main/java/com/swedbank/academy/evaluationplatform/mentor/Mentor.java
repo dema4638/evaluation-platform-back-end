@@ -34,6 +34,12 @@ public class Mentor {
         this.evaluationForms = evaluationForms;
     }
 
+    public Mentor(@NotNull String name, @NotNull Stream stream) {
+        this.name = name;
+        this.stream = stream;
+    }
+
+
     @OneToMany(mappedBy = "mentor")
     Set<Evaluation> evaluationForms;
 

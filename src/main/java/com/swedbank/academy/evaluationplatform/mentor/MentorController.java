@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Set;
 
@@ -69,6 +70,13 @@ public class MentorController {
             e.printStackTrace();
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping(consumes = "application/json", produces = "application/json")
+    @CrossOrigin(origins = "*", allowedHeaders = "*", methods = RequestMethod.POST)
+    public ResponseEntity<?> addMentor(@RequestBody @Valid MentorDTO mentorDTO) {
+        mentorService.addMentor(mentorDTO);
+        return ResponseEntity.ok().build();
     }
 
 }

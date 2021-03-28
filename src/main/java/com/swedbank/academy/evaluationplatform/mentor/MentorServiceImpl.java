@@ -4,10 +4,7 @@ import com.swedbank.academy.evaluationplatform.mentor.exceptions.MentorNotFoundE
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class MentorServiceImpl implements MentorService {
@@ -63,5 +60,14 @@ public class MentorServiceImpl implements MentorService {
     @Override
     public void deleteMentor(Mentor mentor) {
         this.mentorRepository.delete(mentor);
+    }
+
+    @Override
+    public void deleteMentors(ArrayList<Long> mentorsIds) {
+        for(long id: mentorsIds){
+            mentorRepository.deleteMentorsEvaluations(id);
+            mentorRepository.deleteById(id);
+            System.out.println(id);
+        }
     }
 }

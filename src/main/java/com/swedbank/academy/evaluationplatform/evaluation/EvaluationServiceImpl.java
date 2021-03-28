@@ -118,7 +118,6 @@ public class EvaluationServiceImpl implements EvaluationService {
         int extraMile = evaluationDTO.getExtraMile();
         Evaluation evaluation = new Evaluation(id, participation, techSkills, learningPace, extraMile, comment, mentor, student, mentor.getStream());
         evaluationFormRepository.save(evaluation);
-
     }
 
 }

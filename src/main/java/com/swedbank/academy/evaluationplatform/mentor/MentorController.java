@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -79,4 +80,10 @@ public class MentorController {
         return ResponseEntity.ok().build();
     }
 
+    @DeleteMapping()
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    public ResponseEntity<?> deleteMentors(@RequestBody @Valid ArrayList<Long> mentorsIds) {
+        mentorService.deleteMentors(mentorsIds);
+        return ResponseEntity.ok().build();
+    }
 }

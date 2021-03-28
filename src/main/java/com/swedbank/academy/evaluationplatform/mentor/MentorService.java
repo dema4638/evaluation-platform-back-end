@@ -2,6 +2,7 @@ package com.swedbank.academy.evaluationplatform.mentor;
 
 import com.swedbank.academy.evaluationplatform.mentor.exceptions.MentorNotFoundException;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 public interface MentorService {
@@ -15,4 +16,6 @@ public interface MentorService {
     void addMentor(MentorDTO mentorDTO);
 
     void deleteMentor(Mentor mentor);
+
+    void deleteMentors(ArrayList<Long> mentorsIds);
 }

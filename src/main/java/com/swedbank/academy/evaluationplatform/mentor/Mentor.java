@@ -27,6 +27,7 @@ public class Mentor {
     public Mentor() {
     }
 
+
     public Mentor(@NotNull long id, @NotNull String name, @NotNull Stream stream, Set<Evaluation> evaluationForms) {
         this.id = id;
         this.name = name;
@@ -40,7 +41,7 @@ public class Mentor {
     }
 
 
-    @OneToMany(mappedBy = "mentor")
+    @OneToMany( mappedBy = "mentor")
     Set<Evaluation> evaluationForms;
 
 

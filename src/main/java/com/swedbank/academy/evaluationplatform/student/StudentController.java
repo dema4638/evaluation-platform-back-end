@@ -2,10 +2,14 @@ package com.swedbank.academy.evaluationplatform.student;
 
 import com.swedbank.academy.evaluationplatform.evaluation.EvaluationService;
 import com.swedbank.academy.evaluationplatform.evaluation.JointEvaluationDTO;
+import com.swedbank.academy.evaluationplatform.mentor.MentorDTO;
 import com.swedbank.academy.evaluationplatform.student.exception.StudentNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Set;
 
 @RestController
 @CrossOrigin(origins ="*", allowedHeaders ="*")
@@ -20,6 +24,12 @@ public class StudentController {
     public StudentController(StudentService studentService, EvaluationService evaluationService) {
         this.studentService = studentService;
         this.evaluationService = evaluationService;
+    }
+
+    @GetMapping(produces = "application/json")
+    public ResponseEntity<List<StudentDTO>> getAllStudents(){
+        List<StudentDTO> studentDTO = studentService.getAllStudents();
+        return new ResponseEntity<>(studentDTO, HttpStatus.OK);
     }
 
     @GetMapping("{id}")

@@ -56,6 +56,19 @@ public class StudentServiceImpl implements StudentService {
         return studentsDTO;
     }
 
+    @Override
+    public List<StudentDTO> getAllStudents() {
+        List<Student> students = studentRepository.findAll();
+        List<StudentDTO> studentsDTO = new ArrayList<>();
+        for (Student student: students){
+            String name = student.getName();
+            String image = student.getImage();
+            long id = student.getId();
+            studentsDTO.add(new StudentDTO(id, name, image));
+        }
+        return studentsDTO;
+    }
+
 
     @Override
     public StudentDTO getStudentDTO(@Valid Student student, Mentor mentor) {

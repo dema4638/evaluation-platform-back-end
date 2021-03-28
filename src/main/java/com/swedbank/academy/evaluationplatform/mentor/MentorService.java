@@ -17,5 +17,5 @@ public interface MentorService {
 
     void deleteMentor(Mentor mentor);
 
-    void deleteMentors(ArrayList<Long> mentorsIds);
+    void deleteMentor(long mentorId);
 }

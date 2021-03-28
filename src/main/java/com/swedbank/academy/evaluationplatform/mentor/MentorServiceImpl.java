@@ -63,11 +63,9 @@ public class MentorServiceImpl implements MentorService {
     }
 
     @Override
-    public void deleteMentors(ArrayList<Long> mentorsIds) {
-        for(long id: mentorsIds){
-            mentorRepository.deleteMentorsEvaluations(id);
-            mentorRepository.deleteById(id);
-            System.out.println(id);
-        }
+    public void deleteMentor(long mentorId) {
+        System.out.println(mentorId);
+            mentorRepository.deleteMentorsEvaluations(mentorId);
+            mentorRepository.deleteById(mentorId);
     }
 }

@@ -39,7 +39,8 @@ public class MentorController {
 
     @GetMapping("{id}")
     public ResponseEntity<MentorDTO> getMentor(@PathVariable long id){
-        try {
+        System.out.println("hello");
+        try {;
             MentorDTO mentor = mentorService.getMentorById(id);
             return new ResponseEntity<>(mentor, HttpStatus.OK);
         } catch (MentorNotFoundException e){
@@ -80,10 +81,11 @@ public class MentorController {
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping()
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
-    public ResponseEntity<?> deleteMentors(@RequestBody @Valid ArrayList<Long> mentorsIds) {
-        mentorService.deleteMentors(mentorsIds);
+    @DeleteMapping("{mentorId}")
+    public ResponseEntity<?> deleteMentors(@PathVariable @Valid long mentorId) {
+        System.out.println("hello");
+        System.out.println(mentorId);
+        mentorService.deleteMentor(mentorId);
         return ResponseEntity.ok().build();
     }
 }

@@ -76,15 +76,13 @@ public class MentorController {
 
     @PostMapping(consumes = "application/json", produces = "application/json")
     @CrossOrigin(origins = "*", allowedHeaders = "*", methods = RequestMethod.POST)
-    public ResponseEntity<?> addMentor(@RequestBody @Valid MentorDTO mentorDTO) {
-        mentorService.addMentor(mentorDTO);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Mentor> addMentor(@RequestBody @Valid MentorDTO mentorDTO) {
+        Mentor mentor = mentorService.addMentor(mentorDTO);
+        return new ResponseEntity<>(mentor, HttpStatus.OK);
     }
 
     @DeleteMapping("{mentorId}")
     public ResponseEntity<?> deleteMentors(@PathVariable @Valid long mentorId) {
-        System.out.println("hello");
-        System.out.println(mentorId);
         mentorService.deleteMentor(mentorId);
         return ResponseEntity.ok().build();
     }

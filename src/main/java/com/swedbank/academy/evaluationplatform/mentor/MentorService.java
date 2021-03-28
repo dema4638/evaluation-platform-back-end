@@ -13,9 +13,7 @@ public interface MentorService {
 
     public Mentor getMentor(long id) throws MentorNotFoundException;
 
-    void addMentor(MentorDTO mentorDTO);
-
-    void deleteMentor(Mentor mentor);
+    Mentor addMentor(MentorDTO mentorDTO);
 
     void deleteMentor(long mentorId);
 }

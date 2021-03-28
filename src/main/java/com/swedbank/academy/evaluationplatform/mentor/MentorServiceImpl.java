@@ -50,17 +50,14 @@ public class MentorServiceImpl implements MentorService {
     }
 
     @Override
-    public void addMentor(MentorDTO mentorDTO) {
+    public Mentor addMentor(MentorDTO mentorDTO) {
         String name = mentorDTO.getName();
         String stream = mentorDTO.getStream();
         Mentor newMentor = new Mentor(name, Stream.getStream(stream));
         this.mentorRepository.save(newMentor);
+        return newMentor;
     }
 
-    @Override
-    public void deleteMentor(Mentor mentor) {
-        this.mentorRepository.delete(mentor);
-    }
 
     @Override
     public void deleteMentor(long mentorId) {

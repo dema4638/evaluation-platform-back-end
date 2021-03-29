@@ -80,13 +80,8 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void deleteStudent(long id){
-        List<Student> students = studentRepository.findAll();
-        for(Student a : students){
-            if (a.getId() == id){
                 studentRepository.deleteById(id);
                 studentRepository.deleteStudentEvaluations(id);
-            }
-        }
     }
 
 }

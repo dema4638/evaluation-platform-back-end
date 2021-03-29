@@ -1,9 +1,7 @@
 package com.swedbank.academy.evaluationplatform.student;
 
-import com.swedbank.academy.evaluationplatform.evaluation.Evaluation;
 import com.swedbank.academy.evaluationplatform.mentor.Mentor;
 import com.swedbank.academy.evaluationplatform.student.exception.StudentNotFoundException;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -20,5 +18,8 @@ public interface StudentService {
 
     public StudentDTO getStudentDTO(Student student, Mentor mentor);
 
+    public Student addStudent(StudentDTO studentDTO);
+
+    public void updateStudent(StudentDTO studentDTO, long studentId);
 
 }

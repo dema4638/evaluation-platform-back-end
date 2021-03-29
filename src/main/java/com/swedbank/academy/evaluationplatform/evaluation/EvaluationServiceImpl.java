@@ -39,6 +39,17 @@ public class EvaluationServiceImpl implements EvaluationService {
     }
 
     @Override
+    public void updateEvaluation(EvaluationDTO evaluationDTO, Mentor mentor, Student student, long id){
+        String comment = evaluationDTO.getComment();
+        int participation = evaluationDTO.getParticipation();
+        int techSkills = evaluationDTO.getTechSkills();
+        int learningPace = evaluationDTO.getLearningPace();
+        int extraMile = evaluationDTO.getExtraMile();
+        Evaluation evaluation = new Evaluation(id, participation, techSkills, learningPace, extraMile, comment, mentor, student, mentor.getStream());
+        evaluationFormRepository.save(evaluation);
+    }
+
+    @Override
     public EvaluationDTO getEvaluationByIds(long mentor_id, long student_id) throws EvaluationNotFoundException {
         List<Evaluation> evaluations = evaluationFormRepository.findAll();
         for (Evaluation evaluation : evaluations) {
@@ -108,16 +119,5 @@ public class EvaluationServiceImpl implements EvaluationService {
         return evaluationDTO;
     }
 
-    @Override
-    public void updateEvaluation(EvaluationDTO evaluationDTO, Mentor mentor, Student student, long id){
-
-        String comment = evaluationDTO.getComment();
-        int participation = evaluationDTO.getParticipation();
-        int techSkills = evaluationDTO.getTechSkills();
-        int learningPace = evaluationDTO.getLearningPace();
-        int extraMile = evaluationDTO.getExtraMile();
-        Evaluation evaluation = new Evaluation(id, participation, techSkills, learningPace, extraMile, comment, mentor, student, mentor.getStream());
-        evaluationFormRepository.save(evaluation);
-    }
 
 }

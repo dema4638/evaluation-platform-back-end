@@ -1,17 +1,14 @@
 package com.swedbank.academy.evaluationplatform.student;
 
-import com.swedbank.academy.evaluationplatform.evaluation.Evaluation;
 import com.swedbank.academy.evaluationplatform.evaluation.EvaluationService;
 import com.swedbank.academy.evaluationplatform.mentor.Mentor;
 import com.swedbank.academy.evaluationplatform.student.exception.StudentNotFoundException;
-import org.springframework.data.jpa.repository.Query;
+import com.swedbank.academy.evaluationplatform.student.preference.Preference;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 
 @Service
@@ -27,10 +24,11 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentDTO getStudentByID(long id) throws StudentNotFoundException {
+        System.out.println("Hello");
         Student student;
         try {
             student = studentRepository.findById(id).get();
-            return new StudentDTO(student.getId(), student.getName(), student.getImage());
+            return new StudentDTO(student.getId(), student.getName(), student.getImage(), student.getContractType(), student.getPreferencesString());
         } catch (NoSuchElementException e) {
             throw new StudentNotFoundException("Student with given ID does not exist");
         }
@@ -64,7 +62,9 @@ public class StudentServiceImpl implements StudentService {
             String name = student.getName();
             String image = student.getImage();
             long id = student.getId();
-            studentsDTO.add(new StudentDTO(id, name, image));
+            String contract = student.getContractType();
+            List<String> preferences = student.getPreferencesString();
+            studentsDTO.add(new StudentDTO(id, name, image, contract, preferences));
         }
         return studentsDTO;
     }
@@ -75,10 +75,37 @@ public class StudentServiceImpl implements StudentService {
         String name = student.getName();
         String image = student.getImage();
         long id = student.getId();
+        String contract = student.getContractType();
+        List<String> preferences = student.getPreferencesString();
             if (evaluationService.checkIfEvaluationExists(mentor.getId(),student.getId())){
-                return new StudentDTO(id, name, image, true);
+                return new StudentDTO(id, name, image, true, contract, preferences);
             }
-        return new StudentDTO(id, name, image, false);
+        return new StudentDTO(id, name, image, false, contract, preferences);
     }
+
+    @Override
+    public Student addStudent(StudentDTO studentDTO) {
+         Set<Preference> preferences = getPreferences(studentDTO);
+         Student student = new Student(studentDTO.getName(), studentDTO.getImage(), studentDTO.getContractType(), preferences);
+         studentRepository.save(student);
+         return student;
+    }
+
+    @Override
+    public void updateStudent(StudentDTO studentDTO, long studentId){
+        Set<Preference> preferences = getPreferences(studentDTO);
+        studentRepository.save(new Student(studentId, studentDTO.getName(), studentDTO.getImage(), studentDTO.getContractType(), preferences));
+    }
+
+    private Set<Preference> getPreferences(StudentDTO studentDTO){
+        List<String> studentPreferences = studentDTO.getPreferences();
+        Set<Preference> preferences = new HashSet<>();
+        for (String preference: studentPreferences){
+            Preference preferenceFromTable = studentRepository.getPreference(preference);
+            preferences.add(preferenceFromTable);
+        }
+        return preferences;
+    }
+
 
 }

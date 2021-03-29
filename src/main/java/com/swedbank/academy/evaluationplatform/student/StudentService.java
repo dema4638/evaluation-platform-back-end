@@ -18,7 +18,7 @@ public interface StudentService {
 
     public StudentDTO getStudentDTO(Student student, Mentor mentor);
 
-    public void deleteStudent (long id);
+    public void deleteStudent (long studentId);
 
 
 }

@@ -1,5 +1,6 @@
 package com.swedbank.academy.evaluationplatform.student;
 
+import com.swedbank.academy.evaluationplatform.evaluation.EvaluationRepository;
 import com.swedbank.academy.evaluationplatform.evaluation.EvaluationService;
 import com.swedbank.academy.evaluationplatform.mentor.Mentor;
 import com.swedbank.academy.evaluationplatform.student.exception.StudentNotFoundException;
@@ -15,6 +16,7 @@ import java.util.NoSuchElementException;
 public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
     private EvaluationService evaluationService;
+    private EvaluationRepository evaluationRepository;
 
 
     public StudentServiceImpl(StudentRepository studentRepository, EvaluationService evaluationService) {
@@ -79,9 +81,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void deleteStudent(long id){
-                studentRepository.deleteById(id);
-                studentRepository.deleteStudentEvaluations(id);
+    public void deleteStudent(long studentId){
+        studentRepository.deleteStudentEvaluations(studentId);
+        studentRepository.deleteById(studentId);
     }
 
 }

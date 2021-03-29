@@ -20,5 +20,7 @@ public interface StudentService {
 
     public void deleteStudent (long studentId);
 
+    public Student addStudent(StudentDTO studentDTO);
 
+    public void updateStudent(StudentDTO studentDTO, long studentId);
 }

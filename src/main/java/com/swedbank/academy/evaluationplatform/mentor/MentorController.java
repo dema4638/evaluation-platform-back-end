@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -57,8 +56,6 @@ public class MentorController {
             return ResponseEntity.notFound().build();
         }
     }
-
-
 
     @GetMapping("{mentorId}/student")
     public ResponseEntity<List<StudentDTO>> getStudents(@PathVariable long mentorId) {

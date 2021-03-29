@@ -2,14 +2,13 @@ package com.swedbank.academy.evaluationplatform.student;
 
 import com.swedbank.academy.evaluationplatform.evaluation.EvaluationService;
 import com.swedbank.academy.evaluationplatform.evaluation.JointEvaluationDTO;
-import com.swedbank.academy.evaluationplatform.mentor.MentorDTO;
 import com.swedbank.academy.evaluationplatform.student.exception.StudentNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @CrossOrigin(origins ="*", allowedHeaders ="*")
@@ -47,4 +46,12 @@ public class StudentController {
         JointEvaluationDTO jointEvaluation = evaluationService.getJointEvaluation(studentId);
         return new ResponseEntity<JointEvaluationDTO>(jointEvaluation,HttpStatus.OK);
     }
+
+    @DeleteMapping("{studentId}")
+    public ResponseEntity<?> deleteStudent(@PathVariable @Valid long studentId) {
+            studentService.deleteStudent(studentId);
+            return ResponseEntity.ok().build();
+
+    }
+
 }

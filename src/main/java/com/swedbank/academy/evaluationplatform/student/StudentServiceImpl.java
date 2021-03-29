@@ -1,14 +1,11 @@
 package com.swedbank.academy.evaluationplatform.student;
 
-import com.swedbank.academy.evaluationplatform.evaluation.Evaluation;
 import com.swedbank.academy.evaluationplatform.evaluation.EvaluationService;
 import com.swedbank.academy.evaluationplatform.mentor.Mentor;
 import com.swedbank.academy.evaluationplatform.student.exception.StudentNotFoundException;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -79,6 +76,12 @@ public class StudentServiceImpl implements StudentService {
                 return new StudentDTO(id, name, image, true);
             }
         return new StudentDTO(id, name, image, false);
+    }
+
+    @Override
+    public void deleteStudent(long id){
+                studentRepository.deleteById(id);
+                studentRepository.deleteStudentEvaluations(id);
     }
 
 }

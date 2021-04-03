@@ -120,4 +120,16 @@ public class EvaluationServiceImpl implements EvaluationService {
     }
 
 
+    @Override
+    public boolean deleteEvaluation(EvaluationDTO evaluationDTO, long mentor_id, long student_id) {
+        if(checkIfEvaluationExists(mentor_id,student_id)){
+            List<Evaluation> evaluations = evaluationFormRepository.findAll();
+            for (Evaluation e : evaluations){
+                if ((mentor_id == e.getMentor().getId())&&(student_id== e.getStudent().getId())){
+                    evaluationFormRepository.delete(e);
+                }
+            }
+        }
+        return false;
+    }
 }

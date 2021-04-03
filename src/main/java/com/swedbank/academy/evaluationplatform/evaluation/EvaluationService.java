@@ -11,4 +11,5 @@ public interface EvaluationService {
     public boolean checkIfEvaluationExists(long mentorId, long studentId);
     public JointEvaluationDTO getJointEvaluation(long studentId);
     public void updateEvaluation(EvaluationDTO evaluationDTO, Mentor mentor, Student student, long id);
+    public boolean deleteEvaluation(EvaluationDTO evaluationDTO, long mentor_id, long student_id);
 }
